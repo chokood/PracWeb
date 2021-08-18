@@ -1,4 +1,4 @@
-function openSetting()
+function openPopupSetting()
 {
     console.log('openSetting');
     var modal = document.getElementsByClassName("wrap");

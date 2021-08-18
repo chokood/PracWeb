@@ -11,6 +11,7 @@
     height:600px; 
     color:#ffffff; 
     background-color:#1a1a1a; 
+    display: none;
 }
 /*
 #divpop {
