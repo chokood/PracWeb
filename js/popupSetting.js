@@ -1,6 +1,6 @@
 function openPopupSetting()
 {
     console.log('openSetting');
-    var modal = document.getElementsByClassName("wrap");
+    var modal = document.getElementById("indexWrap");
     modal.style.display = "block";
 }
