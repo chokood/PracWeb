@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content=" ">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Ai VinUS DASHBOARD</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="font/nanumsquare.css">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
+    <script>
+        window.addEventListener('load', function() {
+            var allElements = document.getElementsByTagName('*');
+            Array.prototype.forEach.call(allElements, function(el) {
+                var includePath = el.dataset.includePath;
+                if (includePath) {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            el.outerHTML = this.responseText;
+                        }
+                    };
+                    xhttp.open('GET', includePath, true);
+                    xhttp.send();
+                }
+            });
+
+            function openFullscreen()
+            {
+                var element = document.documentElement;
+
+                if (element.requestFullscreen) 
+                    element.requestFullscreen();
+                else if (element.webkitRequestFullscreen) /* Safari */
+                    element.webkitRequestFullscreen();
+                else if (element.msRequestFullscreen) /* IE11 */
+                    element.msRequestFullscreen();
+            }
+
+            var btnLogin = document.getElementById("log-in");
+            btnLogin.onclick = function(event) {
+                var loginForm = document.loginForm;
+                var id = loginForm.id.value;
+                var pw = loginForm.pw.value;
+
+                if( !id || !pw )
+                {
+                    alert("아이디와 비밀번호를 다시 입력해주세요");
+                }
+                else
+                {
+                    // 검증해야 절차 필요
+                    location.href = 'index.html';
+                    openFullscreen();
+                }
+            };
+        });
+   </script>
+
+ </head>
+
+ <body>
+	<!-- 로그인 wrap.S -->
+	<div class="loginWrap">  
+		<div class="loginTop">
+			<div class="loginLogo">
+				<p><img src="img/admin/vinus_bi.png"></p>
+				<p><img src="img/admin/vinus_biLogo.png"></p>
+			</div>
+		</div>
+		<div class="loginBox">
+			<p><img src="img/admin/login.png"></p>
+			<form class="loginForm" name="loginForm">
+				<input class="id-field" type="text" name="id" value="" placeholder="아이디" >
+				<input class="pw-field" type="text" name="pw" value="" placeholder="비밀번호" >
+				<input class="submit-btn" type="button" id="log-in" value="로그인"  >
+
+			<form>
+		</div>
+		<div class="loginCompany"> 
+            <img src="img/fodics_logo.png">
+		</div>
+
+	</div>
+	<!-- 로그인 wrap.E -->
+ </body>
+</html>

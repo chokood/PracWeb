@@ -1,0 +1,452 @@
+<!doctype html>
+<html>
+    <head>
+        <title>TOAST UI - Chart Test</title>
+        <meta charset="utf-8">        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
+        <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
+        <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.css" />
+        <script src="https://uicdn.toast.com/chart/latest/toastui-chart.js"></script>        
+        <link rel="stylesheet" href="../../css/style_graph.css" />     
+        <link rel="stylesheet" href="../../node_modules/tui-grid/dist/tui-grid.min.css">
+        <script src="../../node_modules/tui-grid/dist/tui-grid.min.js"></script>      
+        <script type="text/javascript" src="../../data/pie_data.js"></script> 
+        </head>
+    </head>
+    <script>
+        var chart_pie_ctrl, chart_pie_event, chart_bar;
+        var camera_evt_chart;
+        var size = {                                      // 그래프 출력 크기를 지정
+            width: ( window.innerWidth || document.body.clientWidth ) * 1/3,
+            height: ( window.innerHeight || document.body.clientHeight ) * 1/2
+        }
+
+        window.onload = function () {   
+            
+        }    
+        
+        var grid_prepare;
+
+        function openTab(evt, eventName) {
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(eventName).style.display = "block";
+            evt.currentTarget.className += " active";
+
+            if(eventName === 'CameraData'){
+                if(camera_evt_chart){      
+                    camera_evt_chart.destroy(); 
+                }
+                LoadColumnLineChart();
+                if(grid_prepare){
+                    grid_prepare.destroy();
+                }
+                LoadPrepareTimeGrid();
+            }else if(eventName === 'CameraEvent'){ 
+                if(chart_pie_ctrl) chart_pie_ctrl.destroy();
+                if(chart_pie_event) chart_pie_event.destroy()
+                if(chart_bar) chart_bar.destroy()
+                LoadCtrlPieChart();
+                LoadEvtPieChart();
+                LoadBarDualChart();  
+            }
+
+        }
+
+        function LoadCtrlPieChart()
+        {
+            const el = document.getElementById('ctrl_pie_wnd');
+            
+            var data = camera_event_ctrl_pie_data;          // data 변수에 왜 넣어줘야 되지? 안넣어주면 PieGraph가 그려지지 않음.
+            const options = {
+            chart: { 
+                width: 200, 
+                height: 200,     
+                title: {
+                text: '객체',    // 출력 텍스트 & 가운데 출력
+                offsetX: -10,
+                offsetY: 95,     
+                align:'center'   
+                },  
+                animation: false
+            },  
+            exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },
+            legend: {
+                visible: false
+            },        
+
+            theme:{
+                title: { 
+                fontFamily: 'Verdana',     // 출력 텍스트 색상, 폰트 페밀리, 크기 굵기
+                fontSize: 15,
+                fontWeight: 100,    
+                color: '#FFFFFF'
+                },
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색                            
+                },         
+                legend: {                   // Legend 폰트 관련          
+                label: {            
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    //fontWeight: 700,
+                    color: 'darkgray',
+                    
+                }
+                },        
+            }, 
+            series: {
+                dataLabels: {               // 데이터 출력 라벨
+                visible: false,
+                pieSeriesName: { visible: false }
+                },  
+                radiusRange: {              // 도우넛 설정 INNER / OUTER
+                inner: '45%',
+                outer: '100%',
+                },             
+            },  
+            plot: {           // 실제 원그래프 공간        
+                width: 160,
+                height: 160
+            }     
+            };
+            chart_pie_ctrl = toastui.Chart.pieChart({ el, data, options });                         
+        }
+
+        function LoadEvtPieChart()
+        {
+            const el = document.getElementById('event_pie_wnd');
+            
+            var data = camera_event_evt_pie_data;          // data 변수에 왜 넣어줘야 되지? 안넣어주면 PieGraph가 그려지지 않음.
+            const options = {
+            chart: { 
+                width: 200, 
+                height: 200,     
+                title: {
+                text: '이벤트',    // 출력 텍스트 & 가운데 출력
+                offsetX: -10,
+                offsetY: 95,     
+                align:'center'   
+                },  
+                animation: false
+            },  
+            exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },
+            legend: {
+                visible: false
+            },
+            theme:{
+                title: { 
+                fontFamily: 'Verdana',     // 출력 텍스트 색상, 폰트 페밀리, 크기 굵기
+                fontSize: 15,
+                fontWeight: 100,    
+                color: '#FFFFFF'
+                },
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                },         
+                legend: {                   // Legend 폰트 관련          
+                label: {            
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    //fontWeight: 700,
+                    color: 'darkgray'
+                }
+                },        
+            }, 
+            series: {
+                dataLabels: {               // 데이터 출력 라벨
+                visible: false,
+                pieSeriesName: { visible: false }
+                }, 
+                radiusRange: {              // 도우넛 설정 INNER / OUTER
+                inner: '45%',
+                outer: '100%',
+                },               
+            },  
+            plot: {           // 실제 원그래프 공간        
+                width: 160,
+                height: 160
+            }     
+            };
+            chart_pie_event = toastui.Chart.pieChart({ el, data, options }); 
+        }
+
+        function LoadBarDualChart()
+        {
+            const el = document.getElementById('chart_bar_dual');  
+            const data = evt_time_info_data;
+            
+            const options = {        
+            chart: { 
+                width: size.width * 1.5,        // 출력 그래프 크기 Width
+                height: size.height + 200,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },               
+            exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            }, 
+            series: {
+                stack: true,        
+            },   
+            xAxis: {
+                title: 'value',           // X축 명칭 출력  
+            },
+            yAxis: {
+                title: 'date',            // Y축 명칭 출력        
+            },
+            legend: {  
+                visible:false                     
+            },
+            theme:{        
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                },  
+                series:{
+                colors: ['#EDAE49', '#D1495B', '#00798C', '#30638E', '#00498C', '#306100'],       // 바 색상 지정 <색상을 해당 theme series>에서만 변경 가능
+                },
+                xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)
+                title: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,             
+                    color: 'lightgray'
+                },
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,             
+                    color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+                },
+                yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)
+                title: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,              
+                    color: 'lightgray'
+                },
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+                },
+                legend: {                  // Legend 폰트 관련
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                },   
+                
+                },
+                plot: {                   // 그래프 내부 라인처리
+                vertical: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1,           
+                },
+                horizontal: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1, 
+                },        
+                }
+            },
+            };    
+            chart_bar = toastui.Chart.barChart({ el, data, options });           
+        }
+
+        function LoadColumnLineChart()                  // 악세사리
+        {           
+            const el = document.getElementById('camera_evt_graph');
+            
+            var data = camera_event_line_bar_data; 
+            const options = {        
+                chart: { 
+                width: '100%',        // 출력 그래프 크기 Width
+                height: '100%',      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+                },               
+                exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+                },                  
+                legend: {
+                align: 'bottom',          // legend 출력 위치
+                }, 
+                series: {
+                stack: true
+                },       
+                theme:{        
+                chart:{
+                    fontFamily: 'vedana',     // 그래프 폰트             
+                    backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                }, 
+                            
+                xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,             
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                legend: {                  // Legend 폰트 관련
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                    },         
+                },
+                plot: {                   // 그래프 내부 라인처리
+                    vertical: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1,           
+                    },
+                    horizontal: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1, 
+                    },        
+                },
+                series:{
+                    colors: ['rgba(70,115,200,1)', 'rgba(255,106,107,1)'],       //  색상 지정 <색상을 해당 theme series>에서만 변경 가능
+                },      
+                },
+            };               
+            camera_evt_chart = toastui.Chart.columnLineChart({ el, data, options });  
+            
+        }
+
+        function LoadPrepareTimeGrid(){
+            
+            tui.Grid.applyTheme("normal", {
+            area: {
+                header: {
+                border: '#2d2d2d'
+                }
+            },
+            outline: {
+                border: "#2d2d2d",
+            },
+            cell: {
+                normal: {
+                background: "#252525",
+                border: '#2d2d2d',
+                text: '#c5c5c5',
+                },
+                header: {
+                background: "#1a1a1a",
+                border: "#2d2d2d",
+                text: '#c5c5c5',
+                showHorizontalBorder: false,
+                showVerticalBorder: false,
+                },
+            },
+            });
+            
+            grid_prepare = new tui.Grid({
+            el: document.getElementById('camera_evt_grid'),
+            data: camera_event_evt_grid_data,
+            scrollX: false,
+            scrollY: false,           
+            rowHeight: 60,
+
+            columns: [
+                {
+                align: 'center',
+                header: ' ',
+                name: 'title',                               
+                },
+                {
+                align: 'center',
+                header: '오늘',
+                name: 'today',                               
+                },
+                {
+                align: 'center',
+                header: '어제',
+                name: 'yesterday',                               
+                },
+                {
+                align: 'center',
+                header: '전일 대비',
+                name: 'prepare_prev_day',                               
+                },
+                {
+                align: 'center',
+                header: '한주 전',
+                name: 'prepare_prev_week',                               
+                },
+                {
+                align: 'center',
+                header: '직전주 대비',
+                name: 'prepare_week',                               
+                }                  
+            ],
+
+            });
+        }
+       
+    </script>
+
+    <body>            
+        <!-- Tab links -->
+        <div class="tab">
+            <button class="tablinks" onclick="openTab(event, 'CameraEvent')">전체 카메라 이벤트 발생 현황</button>
+            <button class="tablinks" onclick="openTab(event, 'CameraData')">카메라 이벤트별 데이터 비교</button>            
+        </div>
+        <!-- Tab content -->
+        <div id="CameraEvent" class="tabcontent" style = "width:1000px; height:100%; background-color:rgba(30,30,30,1);">    
+
+            <div style = "width:100%; height:25%; float:left; background-color:rgba(30,30,30,1);" >     
+                <div  style = "width:200; height:200; float:right;" id = "event_pie_wnd">     
+
+                </div>   
+                <div style = "width:200; height:200; float:right;"  id = "ctrl_pie_wnd">     
+                    
+                </div>           
+            </div>            
+            <div style = "overflow:auto; width:1000px; height:550px; background-color:rgba(30,30,30,1);"  >     
+                <div style = "width:900px;" class="chart" id="chart_bar_dual"></div> 
+            </div>     
+        </div>
+        
+        <div id="CameraData" class="tabcontent" style = "width:1000px; height:100%; background-color:rgba(30,30,30,1);">    
+
+            <div style = "width:100%; height:450px; background-color:rgba(30,30,30,1);" id = "camera_evt_graph">
+            </div>            
+            <div style = "width:100%; height:4500px; background-color:rgba(255,30,30,1);" id = "camera_evt_grid">                  
+            </div> 
+        </div>
+    </body>
+</html>

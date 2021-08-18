@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content=" ">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Ai VinUS DASHBOARD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/object.css">
+
+  <link rel="stylesheet" href="css/style_grid.css">
+  <link rel="stylesheet" href="font/nanumsquare.css">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./node_modules/tui-grid/dist/tui-grid.min.css">
+  <link rel="stylesheet" href="./node_modules/tui-date-picker/dist/tui-date-picker.css">
+  
+
+  
+  <script src="./node_modules/tui-grid/dist/tui-grid.min.js"></script>
+  <script src="./node_modules/tui-date-picker/dist/tui-date-picker.min.js"></script>
+  <script src="./data/data.js"></script>
+  <!-- 탭벼튼 스크립트.S-->
+  <script type="text/javascript" src="js/tabcontent.js"></script>
+  <!-- 탭벼튼 스크립트.E-->
+
+  <script>
+	  
+	var grid
+	window.onload = function () {
+
+		tui.Grid.applyTheme("normal", {
+			area: {
+				header: {
+					border: '#2d2d2d'
+				}
+			},
+			outline: {
+				border: "#2d2d2d",
+			},
+			cell: {
+				normal: {
+					background: "#252525",
+					border: '#2d2d2d',
+					text: '#c5c5c5',
+					showHorizontalBorder: true,
+					showVerticalBorder: true,
+				},
+				header: {
+					background: "#1a1a1a",
+					border: "#2d2d2d",
+					text: '#c5c5c5',
+					showHorizontalBorder: true,
+					showVerticalBorder: true,
+				},
+			},
+			scrollbar:
+			{
+				border: "#2d2d2d",
+				background: "#2d2d2d",
+				emptySpace: "#1a1a1a",
+				thumb : "#838383",
+				active: "#aaa",
+			},
+		});
+
+
+
+	var bScroll = false;
+	if(Object.keys(gridData).length > 15)
+		 bScroll = true;
+
+	grid = new tui.Grid({
+      el: document.getElementById('grid_object'),
+      data: gridData,
+      scrollX: false,
+      scrollY:  bScroll,
+
+      //rowHeaders: ["rowNum"],
+      rowHeight: 47,
+	  width : 1630,
+	  bodyHeight: 752,
+
+      columns: [
+        {
+          align: 'left',
+          header: '카메라명',
+          name: 'cameraName',
+          sortingType: 'desc',
+          sortable: true,
+
+          width: 280
+        },
+        {
+          align: 'right',
+          header: '남자',
+          name: 'male',
+          sortingType: 'desc',
+        },
+        {
+          align: 'right',
+          header: '여자',
+          name: 'female',
+          sortingType: 'desc',
+        },
+        {
+          align: 'right',
+          header: '미성년',
+          name: 'young',
+          sortingType: 'desc',
+        },
+        {
+          align: 'right',
+          header: '청년',
+          name: 'youth',
+          sortingType: 'desc',
+        },
+        {
+          align: 'right',
+          header: '중·장년',
+          name: 'middle',
+          sortingType: 'desc',
+        },
+        {
+          align: 'right',
+          header: '노년',
+          name: 'old',
+          sortingType: 'desc',
+        },
+        {
+          align: 'right',
+          header: 'TOTAL',
+          name: 'total',
+          sortingType: 'desc',
+        },
+        {
+          align: 'center',
+          header: '마스크착용',
+          name: 'mask',
+          sortingType: 'desc',
+        },
+        {
+          align: 'center',
+          header: '주의인물',
+          name: 'attention',
+          sortingType: 'desc',
+        }
+      ],
+
+    });
+
+	
+
+	var today = new Date();
+    var picker = tui.DatePicker.createRangePicker({
+		language:'ko',
+		
+
+        startpicker: {
+            date: today,
+            input: '#startpicker-input',
+            container: '#startpicker-container',
+        },
+        endpicker: {
+            date: today,
+            input: '#endpicker-input',
+            container: '#endpicker-container'
+        },
+		format: 'yyyy년 MM월 dd일',
+        selectableRanges: [
+            [today, new Date(today.getFullYear() + 1, today.getMonth(), today.getDate())]
+        ]
+    });
+
+
+  }
+       window.addEventListener('load', function() {
+          var allElements = document.getElementsByTagName('*');
+          Array.prototype.forEach.call(allElements, function(el) {
+              var includePath = el.dataset.includePath;
+              if (includePath) {
+                  var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function () {
+                      if (this.readyState == 4 && this.status == 200) {
+                          el.outerHTML = this.responseText;
+                      }
+                  };
+                  xhttp.open('GET', includePath, true);
+                  xhttp.send();
+              }
+          });
+      });
+   </script>
+
+ </head>
+
+ <body>
+	<!-- 전체 wrap.S -->
+	<div class="wrap">  
+
+		<!-- 헤더.S -->
+		<header id="header"> 
+			<div data-include-path="inc_header.html"></div>
+			
+		</header>
+		<!-- 헤더.E -->
+
+		<!-- 내용.S -->		
+		<div class="container">
+
+			<!-- side 영역.S -->
+			<div id="side">
+
+				<!-- 좌측 네비.S -->
+				<div class="btn-navi" >
+					<button type="button" class="btn_object_on" onClick="location.href='index.html'">객체우선</button>
+					<button type="button" class="btn_evnet" onClick="location.href='main_event.html'">이벤트우선</button>
+					<button type="button" class="btn_camera" onClick="location.href='main_camera.html'">카메라우선</button>
+				</div>
+				<!-- 좌측 네비.E -->
+
+				<!-- 실시간 채널.S -->
+				<div data-include-path="inc_side.html"></div>
+				<!-- 실시간 채널.E -->
+				
+			</div>
+			<!-- side 영역.E -->
+
+			<!-- 우측 메인.S -->
+			<div id="contentsWrap">
+				<!-- 상단 날짜,버튼 영역.S -->
+				<div class="mainTop">
+					<div class=" dateArea">
+						<a class="rollover" alt="달력" ><img src="img/btn-calendar.png"> <img src="img/btn-calendar_hover.png" class="over"></a>
+						<p class="date">2021년 07월 21일</p>
+						<button type="button" class="btn-date" href="#">◀<!-- <img src="img/btn-calendarLeft.png">--></button>
+						<button type="button" class="btn-date" href="#">▶<!-- <img src="img/btn-calendarRight.png">--></button>
+						<button type="button" class="btn" href="#">오늘</button>
+					</div>
+					
+				</div>
+				<!-- 상단 날짜,버튼 영역.E -->
+
+
+				<div class="contentsArea">
+					<!-- 
+					<div class="contensTypebtnArea">
+						<a class="rollover" alt="사람 카메라 정보 상세" ><img src="img/grid_temp/object_person.PNG"> <img src="img/grid_temp/object_person_hover.PNG" class="over"></a>
+						<a class="rollover" alt="차량 카메라 정보 상세" ><img src="img/grid_temp/object_vehicle.PNG"> <img src="img/grid_temp/object_vehicle_hover.PNG" class="over"></a>
+					</div>
+
+					<div class="subTabs">
+						<div class="tabsTitle"><img src="img/navi_object.png"></div>
+						<ul class="tabs" data-persist="true">
+							<li class="tabsON"><a href="sub_object.html" >사람 카메라 정보 상세</a></li>
+							<li><a href="sub_object_car.html" >차량 카메라 정보 상세</a></li>
+						</ul>
+					</div> -->
+
+					<div class="subTabs">
+						<div class="tabsTitle"><img src="img/navi_object.png"></div>
+						<ul class="tabs" data-persist="true">
+							<li><a href="#view1" >사람 카메라 정보 상세</a></li>
+							<li><a href="#view2" >차량 카메라 정보 상세</a></li>
+						</ul>
+					</div>
+
+					<!-- 메인컨텐츠.S -->
+					<div class="contentsGridDataArea">
+
+						<!-- 탭 view1.S -->
+						<div id="view1">
+							<div class="sectionDate"> 
+								<span>기간</span>	
+								<div class="tui-datepicker-input tui-datetime-input tui-has-focus" >
+									<span class="tui-ico-date"> </span>								
+									<input id="startpicker-input" type="text" aria-label="Date" >
+									<div id="startpicker-container" ></div>
+								</div>
+								<span>~</span>							
+								<div class="tui-datepicker-input tui-datetime-input tui-has-focus">
+									<span class="tui-ico-date"> </span>
+									<input id="endpicker-input" type="text" aria-label="Date" >
+									<div id="endpicker-container"></div>
+								</div>
+
+								<input class="text_cam_name" type="text" id="name" name="name" required minlength="4" maxlength="8" size="25" placeholder="카메라 명을 입력하세요.">
+	
+								<button type="button" class="btn" style="margin-top: -5px; margin-left: 10px;" >검색</button> 
+	
+								<div class="btnArea">
+									<button type="button" class="btn" onClick="location.href='./HTML/Chart/nonoc.html'">차트</button>
+									<button type="button" class="btn" onClick="location.href='./HTML/Grid/grid_ui_test.html'">그리드</button>
+									<a class="rollover" alt="csv파일" ><img src="img/btn-downCSV.png"> <img src="img/btn-downCSV_hover.png" class="over"></a>
+									<a class="rollover" alt="csv파일" ><img src="img/btn-downBMP.png"> <img src="img/btn-downBMP_hover.png" class="over"></a>
+									<a class="rollover" alt="csv파일" ><img src="img/btn-downPrint.png"> <img src="img/btn-downPrint_hover.png" class="over"></a>
+								</div>
+							</div>
+
+							<div class="sectionBox1type"> <!--사람 카메라 정보 상세-->
+								<div id="grid_object" ></div>
+							</div>
+						</div>
+						<!-- 탭 view1.E -->
+
+
+					</div>
+				</div>
+
+
+				<!-- 메인컨텐츠.E -->
+				<div id="bottom">
+					<p class="Notice">※ 화면에 표시되는 모든 실시간 데이터는 1분마다 자동으로 업데이트 합니다. 다만 “시간대별 현황” 그래프의 실시간 데이터는 정시에 한 번씩 업데이트 합니다.</p>
+					<div class="madeFodics">포딕스시스템</div>
+				</div>
+			</div>
+			<!-- 우측 메인.E -->
+
+		</div>
+		<!--  내용.E -->
+	</div>
+	<!-- 전체 wrap.E -->
+ </body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="./node_modules/tui-time-picker/dist/tui-time-picker.css">
+  <link rel="stylesheet" href="./node_modules/tui-date-picker/dist/tui-date-picker.css"> -->
+  <link rel="stylesheet" href="../../node_modules/tui-grid/dist/tui-grid.min.css">
+  <!-- <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="../../css/style.css">
+  <!-- <script src="./node_modules/jquery/dist/jquery.min.js"></script> -->
+  <!-- <script src="./node_modules/tui-time-picker/dist/tui-time-picker.min.js"></script>
+  <script src="./node_modules/tui-date-picker/dist/tui-date-picker.min.js"></script> -->
+  <script src="../../node_modules/tui-grid/dist/tui-grid.min.js"></script>
+  <script src="../../data/data.js"></script>
+
+  <!--폰트 테스트용...-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+
+</head>
+<style>
+
+</style>
+<script>
+  var grid01, grid02;
+  window.onload = function () {
+
+    class CustomRenderer {
+      constructor(props) {
+        const el = document.createElement('img');
+        el.src = 'some-image-link';
+
+        this.el = el;
+        this.render(props);
+      }
+
+      getElement() {
+        return this.el;
+      }
+
+      render(props) {
+        const { imgType } = props.columnInfo.renderer.options;
+        if (imgType == 'icon01') {
+          this.el.src = String('../../img/Icon/icon01.PNG');
+        }
+        else if (imgType == 'icon02') {
+          this.el.src = String('../../img/Icon/icon02.PNG');
+        }
+
+
+      }
+    }
+
+    tui.Grid.applyTheme("normal", {
+      area: {
+        header: {
+          border: '#2d2d2d'
+        }
+      },
+      outline: {
+        border: "#2d2d2d",
+      },
+      cell: {
+        normal: {
+          background: "#252525",
+          border: '#2d2d2d',
+          text: '#c5c5c5',
+        },
+        header: {
+          background: "#1a1a1a",
+          border: "#2d2d2d",
+          text: '#c5c5c5',
+          showHorizontalBorder: false,
+          showVerticalBorder: true,
+        },
+      },
+    });
+
+    grid01 = new tui.Grid({
+      el: document.getElementById('grid01'),
+      data: gridData,
+      scrollX: false,
+      scrollY: false,
+      //rowHeaders: ["rowNum"],
+      rowHeight: 50,
+
+      columns: [
+        {
+          align: 'left',
+          header: '카메라명',
+          name: 'cameraName',
+          sortingType: 'desc',
+          sortable: true,
+
+          width: 280
+        },
+        {
+          align: 'center',
+          header: 'Icon',
+          name: 'icon',
+          renderer:
+          {
+            type: CustomRenderer,
+            options:
+            {
+              imgType: 'icon02',
+            }
+          },
+          sortingType: 'desc',
+        },
+        {
+          align: 'center',
+          header: 'Graph',
+          name: 'graph',
+          sortingType: 'desc',
+        },
+        {
+          align: 'right',
+          header: '남자',
+          name: 'male',
+          sortingType: 'desc',
+          sortable: true
+        },
+        {
+          align: 'right',
+          header: '여자',
+          name: 'female',
+          sortingType: 'desc',
+          sortable: true
+        },
+        {
+          align: 'right',
+          header: '미성년',
+          name: 'young',
+          sortingType: 'desc',
+          sortable: true
+        },
+        {
+          align: 'right',
+          header: '청년',
+          name: 'youth',
+          sortingType: 'desc',
+          sortable: true
+        },
+        {
+          align: 'right',
+          header: '중·장년',
+          name: 'middle',
+          sortingType: 'desc',
+          sortable: true
+        },
+        {
+          align: 'right',
+          header: '노년',
+          name: 'old',
+          sortingType: 'desc',
+          sortable: true
+        },
+        {
+          align: 'right',
+          header: 'TOTAL',
+          name: 'total',
+          sortingType: 'desc',
+          sortable: true
+        },
+        {
+          align: 'center',
+          header: '마스크착용',
+          name: 'mask',
+          sortingType: 'desc',
+          sortable: true
+        },
+        {
+          align: 'center',
+          header: '주의인물',
+          name: 'attention',
+          sortingType: 'desc',
+          sortable: true
+        }
+      ],
+
+    });
+
+
+    grid02 = new tui.Grid({
+      el: document.getElementById('grid02'),
+
+      data: gridData2,
+      scrollX: false,
+      scrollY: false,
+      //rowHeaders: ["rowNum"],
+      rowHeight: 50,
+      columns: [
+        {
+          align: 'center',
+          header: '이벤트명',
+          name: 'eventName',
+          sortingType: 'desc',
+          width: 200,
+          columnOptions: {
+            resizeble: true,
+          }
+        },
+        {
+          align: 'right',
+          header: '오늘',
+          name: 'today',
+          sortingType: 'desc',
+          validation: {
+            dataType: 'number',
+            required: false
+          }
+        },
+        {
+          align: 'right',
+          header: '어제',
+          name: 'yesterday',
+          sortingType: 'desc',
+          renderer: {
+            styles: {
+              fontWeight: 'bold',
+              //color: (props) => props.value.length > 3 ? '#f00000' : '#f00000',
+              color: '#f00000',
+            },
+            attributes: {
+
+              'data-type': 'default',
+              title: (props) => `title: ${props.formattedValue}`,
+            },
+            classNames: ['tui-grid-cell.cell-red'],
+          },
+          validation: {
+            dataType: 'number',
+            required: false
+          }
+        },
+        {
+          align: 'right',
+          header: '전일 대비',
+          name: 'compYesterday',
+          sortingType: 'desc',
+        },
+        {
+          align: 'right',
+          header: '한 주 전',
+          name: 'compWeek',
+          sortingType: 'desc',
+        },
+        {
+          align: 'right',
+          header: '직전 주 대비',
+          name: 'compLastWeek',
+          sortingType: 'desc',
+        },
+      ],
+    });
+
+
+    // $.ajax({
+    //   method: "GET",
+    //       url:"./data/index.js",
+    //       success : function(result){
+    //           grid01.resetData(eval(result));
+    //       },
+
+    //   });
+    //   $.ajax({
+    //   method: "GET",
+    //       url:"./data/index2.js",
+    //       success : function(result){
+    //           grid02.resetData(eval(result));
+    //       },
+
+    //   });
+
+    // $("button").click(function(){
+    //     $.ajax({
+    //         url:"index.js",
+    //         method: "GET",
+    //         success : function(result){
+    //             grid.resetData(eval(result));
+    //         },
+    //     });
+    //   });
+  };
+
+
+
+</script>
+
+<body>
+  <div id="wrap_grid01">
+    <div id="grid01" style="width:1300px; margin-top: 30px;">Grid Sample 01</div>
+  </div>
+
+  <div class="wrap_grid02">
+    <div id="grid02" style="width:800px; margin-top: 30px;">Grid Sample 02</div>
+  </div>
+
+  <div id="wrap_text" >
+    <div id="info">
+<p>
+  <h1>변경 가능 부분</h1><br>
+-그리드 전체 색상<br>
+-셀 배경 색상<br>
+-셀 클릭시 배경 색상<br>
+-텍스트 색상<br>
+-그리드 색상<br>
+-가로, 세로 구분 라인 활성화/비활성화<br>
+-정렬 버튼 추가<br>
+-셀에 이미지 추가<br>
+-폰트<br>
+-셀 높이, 너비<br>
+</p>
+<br>
+<br>
+<p>
+  <h1>구현 불가 및 미흡</h1><br>
+-표에 그래프 넣는 부분<br>
+-각 컬럼 별 개별 색상 변경 부분 (찾아보고 있는데 잘 안나옴..)<br>
+-grid 헤더 숨기기<br>
+</p>
+    </div>
+  </div>
+
+</body>
+
+</html>

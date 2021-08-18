@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content=" ">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Ai VinUS DASHBOARD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/camera.css">
+
+  <link rel="stylesheet" href="font/nanumsquare.css">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
+  <script type="text/javascript" src="js/tabcontent.js"></script>
+  <script>
+       window.addEventListener('load', function() {
+          var allElements = document.getElementsByTagName('*');
+          Array.prototype.forEach.call(allElements, function(el) {
+              var includePath = el.dataset.includePath;
+              if (includePath) {
+                  var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function () {
+                      if (this.readyState == 4 && this.status == 200) {
+                          el.outerHTML = this.responseText;
+                      }
+                  };
+                  xhttp.open('GET', includePath, true);
+                  xhttp.send();
+              }
+          });
+      });
+   </script>
+
+ </head>
+
+ <body>
+	<!-- 전체 wrap.S -->
+	<div class="wrap">  
+
+		<!-- 헤더.S -->
+		<header id="header"> 
+			<div data-include-path="inc_header.html"></div>
+		
+		</header>
+		<!-- 헤더.E -->
+
+		<!-- 내용.S -->		
+		<div class="container">
+
+			<!-- side 영역.S -->
+			<div id="side">
+
+				<!-- 좌측 네비.S -->
+				<div class="btn-navi" >
+					<button type="button" class="btn_object" onClick="location.href='index.html'">객체우선</button>
+					<button type="button" class="btn_evnet" onClick="location.href='main_event.html'">이벤트우선</button>
+					<button type="button" class="btn_camera_on" onClick="location.href='main_camera.html'">카메라우선</button>
+				</div>
+				<!-- 좌측 네비.E -->
+
+				<!-- 실시간 채널.S -->
+				<div data-include-path="inc_side.html"></div>
+				<!-- 실시간 채널.E -->
+				
+			</div>
+			<!-- side 영역.E -->
+
+
+			<!-- 우측 메인.S -->
+			<div id="contentsWrap">
+				<!-- 상단 날짜,버튼 영역.S -->
+				<div class="mainTop">
+					<div class=" dateArea">
+						<a class="rollover" alt="달력" ><img src="img/btn-calendar.png"> <img src="img/btn-calendar_hover.png" class="over"></a>
+						<p class="date">2021년 07월 21일</p>
+						<button type="button" class="btn-date" href="#">◀<!-- <img src="img/btn-calendarLeft.png">--></button>
+						<button type="button" class="btn-date" href="#">▶<!-- <img src="img/btn-calendarRight.png">--></button>
+						<button type="button" class="btn" href="#">오늘</button>
+					</div>
+					<div class="btnArea">
+						<button type="button" class="btn" onClick="location.href='./HTML/Chart/nonoc.html'">차트</button>
+						<button type="button" class="btn" onClick="location.href='./HTML/Grid/grid_ui_test.html'">그리드</button>
+						<a class="rollover" alt="csv파일" ><img src="img/btn-downCSV.png"> <img src="img/btn-downCSV_hover.png" class="over"></a>
+						<a class="rollover" alt="csv파일" ><img src="img/btn-downBMP.png"> <img src="img/btn-downBMP_hover.png" class="over"></a>
+						<a class="rollover" alt="csv파일" ><img src="img/btn-downPrint.png"> <img src="img/btn-downPrint_hover.png" class="over"></a>
+					</div>
+				</div>
+				<!-- 상단 날짜,버튼 영역.E -->
+
+				<!-- 메인컨텐츠.S -->
+				<div class="contents">
+
+					<!-- 섹션 좌측.S -->
+					<div class="sectionBox">
+						<div class="innerBox divCameraToday">
+							<div class="contentsTitle">
+								<div class="title">
+									<h4>TODAY</h4>
+								</div>
+							</div>
+							<div class="data">
+								<ul>
+									<li class="today-part8">
+										<div class="todayTXT todayHuman">
+											<p class="todayIMG"><img src="img/icon_titleHuman.png"></p>
+											<p class="todayTitle color-Human">사람</p>
+											<p class="amount">7,999</p>
+											<p class="contrast">전일대비 <span class="lower">▼313</span></p>
+										</div>
+										<div class="todayBoard">
+											<dl>
+												<dt>1층 서관 주 출입구 </dt>
+												<dd>7,999</dd>
+											</dl>
+										</div>
+									</li>
+									<li class="today-part8">
+										<div class="todayTXT todayCar">
+											<p class="todayIMG"><img src="img/icon_titleCar.png"></p>
+											<p class="todayTitle color-Car">차량</p>
+											<p class="amount">7,999</p>
+											<p class="contrast">전일대비 <span class="upper">▲313</span></p>
+										</div>
+										<div class="todayBoard">
+											<dl>
+												<dt>1층 서관 주 출입구 </dt>
+												<dd>7,999</dd>
+											</dl>
+										</div>
+									</li>
+									<li class="today-part8">
+										<div class="todayTXT todayFace">
+											<p class="todayIMG"><img src="img/icon_titleFace.png"></p>
+											<p class="todayTitle color-Face">얼굴</p>
+											<p class="amount">7,999</p>
+											<p class="contrast">전일대비 <span class="upper">▲1,313</span></p>
+										</div>
+										<div class="todayBoard">
+											<dl>
+												<dt>1층 서관 주 출입구 </dt>
+												<dd>7,999</dd>
+											</dl>
+										</div>
+									</li>
+									<li class="today-part8">
+										<div class="todayTXT todayIntrusion">
+											<p class="todayIMG"><img src="img/icon_titleIntrusion.png"></p>
+											<p class="todayTitle color-Intrusion">침입</p>
+											<p class="amount">7,999</p>
+											<p class="contrast">전일대비 <span class="lower">▼313</span></p>
+										</div>
+										<div class="todayBoard">
+											<dl>
+												<dt>1층 서관 주 출입구 </dt>
+												<dd>7,999</dd>
+											</dl>
+										</div>
+										
+									</li>
+									<li class="today-part8">
+										<div class="todayTXT todayCounting">
+											<p class="todayIMG"><img src="img/icon_titleCounting.png"></p>
+											<p class="todayTitle color-Counting">카운팅</p>
+											<p class="amount">7,999</p>
+											<p class="contrast">전일대비 <span class="upper">▲313</span></p>
+										</div>
+										<div class="todayBoard">
+											<dl>
+												<dt>1층 서관 주 출입구 </dt>
+												<dd>7,999</dd>
+											</dl>
+										</div>
+									</li>
+									<li class="today-part8">
+										<div class="todayTXT todayLoitering">
+											<p class="todayIMG"><img src="img/icon_titleLoitering.png"></p>
+											<p class="todayTitle color-Loitering">배회</p>
+											<p class="amount">7,999</p>
+											<p class="contrast">전일대비 <span class="lower">▼13</span></p>
+										</div>
+										<div class="todayBoard">
+											<dl>
+												<dt>1층 서관 주 출입구 </dt>
+												<dd>7,999</dd>
+											</dl>
+										</div>
+									</li>
+									<li class="today-part8">
+										<div class="todayTXT todayLPR">
+											<p class="todayIMG"><img src="img/icon_titleLPR.png"></p>
+											<p class="todayTitle color-LPR">차량 번호 인식</p>
+											<p class="amount">7,999</p>
+											<p class="contrast">전일대비 <span class="lower">▼9,313</span></p>
+										</div>
+										<div class="todayBoard">
+											<dl>
+												<dt>1층 서관 주 출입구 </dt>
+												<dd>7,999</dd>
+											</dl>
+										</div>
+									</li>
+									<li class="today-part8">
+										<div class="todayTXT todayParking">
+											<p class="todayIMG"><img src="img/icon_titleNoParking.png"></p>
+											<p class="todayTitle color-Parking">불법 주·정차</p>
+											<p class="amount">7,999</p>
+											<p class="contrast">전일대비 <span class="upper">313</span></p>
+										</div>
+										<div class="todayBoard">
+											<dl>
+												<dt>1층 서관 주 출입구 </dt>
+												<dd>7,999</dd>
+											</dl>
+										</div>
+									</li>
+								</ul>
+
+							</div>
+						</div>
+
+					</div>
+					<!-- 섹션 좌측.E -->
+
+					<!-- 섹션 우측.S -->
+					<div class="sectionBox">
+						<div class="innerBox divEventAge">
+							<div class="contentsTitle">
+								<div class="title">
+									<h4>연령별 출입자 현황</h4>
+								</div>
+								<div class="partBTN">
+									<button type="button" class="btn-dataCapture" >Ξ</a>
+								</div>
+							</div>
+							<div class="data01">
+								<img src="img/sample/_sample-diagram04.png">
+							</div>
+
+							<div class="data02">
+								<p>마스크 착용 비율</p>
+								<img src="img/sample/_sample-diagram05.png">
+							</div>
+						</div>		
+	
+						<div class="innerBox divEvent">
+							<div class="contentsTitle">
+								<div class="title">
+									<h4>이벤트 발생 비율</h4>
+								</div>
+							</div>
+							<div class="data">
+								<img src="img/sample/_sample-diagram02.png">
+							</div>
+						</div>	
+					</div>	
+					<!-- 섹션 우측.E -->
+				</div>
+				<!-- 메인컨텐츠.E -->
+				<div id="bottom">
+					<p class="Notice">※ 화면에 표시되는 모든 실시간 데이터는 1분마다 자동으로 업데이트 합니다. 다만 “시간대별 현황” 그래프의 실시간 데이터는 정시에 한 번씩 업데이트 합니다.</p>
+					<div class="madeFodics">포딕스시스템</div>
+				</div>
+			</div>
+			<!-- 우측 메인.E -->
+
+		</div>
+		<!--  내용.E -->
+	</div>
+	<!-- 전체 wrap.E -->
+ </body>
+</html>

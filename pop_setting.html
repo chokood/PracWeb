@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>VinUS-Admin Setting</title>
+  <link rel="stylesheet" href="css/popup.css">
+
+  <!-- 탭벼튼 스크립트.S -->
+  <script type="text/javascript" src="js/tabcontent.js"></script>
+  <!-- 탭벼튼 스크립트.E -->
+
+ </head>
+ <body>
+
+	<!--<div id="divpop" id="modalWrap">-->
+	<div>
+		<!-- POPUP --> 
+		<!--<div class="divpop-content" >-->
+		<div id="divpop">
+			<div>
+				<div class="pop-btnWin">
+					<a class="rollover" alt="창내림" ><img src="img/admin/btn_POPwinMini.png"> <img src="img/admin/btn_POPwinMini_hover.png" class="over"></a>
+					<a class="rollover" alt="창닫기" ><img src="img/admin/btn_POPwinClose.png"> <img src="img/admin/btn_POPwinClose_hover.png" class="over"></a>
+				</div>
+			</div>
+
+			<div class="pu-tabBox">
+				<div class="pu-tabTitle">
+					<img src="img/admin/icon_setting.png">
+				</div>
+				<ul class="tabs" data-persist="true">
+					<li><a href="#view1" >사용자 정보 조회</a></li>
+					<li><a href="#view2" >사용자 정보 등록</a></li>
+					<li><a href="#view3" >사용자 환경 설정</a></li>
+				</ul>
+			</div>
+
+			<!-- 1-사용자 정보 조회.S -->
+			<div id="view1" class="settingBox">
+				<!--  테이블 영역 샘플.s -->
+				<table class="userList">
+				    <colgroup>
+						<col width="8%">
+						<col width="15%">
+						<col width="20%">
+						<col width="20%">
+						<col width="20%">
+						<col width="*">
+					</colgroup>
+					<tr>
+						<th ><input type="checkbox" name=""></th>
+						<th>이름</th>
+						<th>아이디</th>
+						<th>비밀번호</th>
+						<th>개인정보 백업</th>
+						<th>계정상태</th>
+					</tr>
+					<tr class="adminLine">
+						<td> </td>
+						<td>관리자</td>
+						<td>admin</div></td>
+						<td>admin1234</td>
+						<td>가능</td>
+						<td>사용중</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name=""></td>
+						<td>홍길동</td>
+						<td>test</div></td>
+						<td>test</td>
+						<td>가능</td>
+						<td>사용</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name=""></td>
+						<td>홍길동</td>
+						<td>test</div></td>
+						<td>test</td>
+						<td class="notUsed">불가능</td>
+						<td>사용</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name=""></td>
+						<td>홍길동</td>
+						<td>hong-gd</div></td>
+						<td>test1234</td>
+						<td>가능</td>
+						<td class="notUsed">미사용</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name=""></td>
+						<td>홍길동</td>
+						<td>hong-gd</div></td>
+						<td>test1234</td>
+						<td>가능</td>
+						<td class="notUsed">미사용</td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name=""></td>
+						<td>홍길동</td>
+						<td>hong-gd</div></td>
+						<td>test1234</td>
+						<td>가능</td>
+						<td class="notUsed">미사용</td>
+					</tr>
+				</table>
+				<!--  테이블 영역 샘플.e -->
+				<div class="pop-btnBox">
+					<a class="rollover" alt="사용자 추가" ><img src="img/admin/btn_user.png"> <img src="img/admin/btn_user_hover.png" class="over"></a>
+					<a class="rollover" alt="사용자 삭제" ><img src="img/admin/btn_userDel.png"> <img src="img/admin/btn_userDel_hover.png" class="over"></a>
+				</div>
+			</div>
+			<!-- 1-사용자 정보 조회.E -->
+
+			<!-- 2-사용자 정보 등록.S -->
+			<div id="view2" class="settingBox ">
+				<div class="userInfo">
+					<dl>
+						<dt>이름<span class="required">*</span></dt>
+						<dd><input type="text" class="txt-field" placeholder="사용자 명을 입력 해 주세요." > </dd>
+						<dt>아이디<span class="required">*</span></dt>
+						<dd><input type="text" class="txt-field" placeholder="아이디를 입력 해 주세요."> </dd>
+						<dt>비밀번호<span class="required">*</span></dt>
+						<dd><input type="text" class="txt-field" placeholder="비밀번호를 입력 해 주세요."> </dd>
+						<dt>개인정보 백업<span class="required">*</span></dt>
+						<dd>
+							<input name="backup" id="radio" type="radio" class="btnRadio">
+							<label>가능</label> 
+							<input name="backup" id="radio" type="radio" class="btnRadio">
+							<label>불가능</label>
+						</dd>
+						<dt>계정 상태</dt>
+						<dd>
+							<input name="used" id="radio" type="radio" class="btnRadio">
+							<label>사용중</label> 
+							<input name="used" id="radio" type="radio" class="btnRadio">
+							<label>미사용</label>
+						</dd>
+					</dl>
+				</div>
+				<div class="pop-btnBox">
+					<a class="rollover" alt="저장" ><img src="img/admin/btn_save.png"> <img src="img/admin/btn_save_hover.png" class="over"></a>
+					<a class="rollover" alt="취소" ><img src="img/admin/btn_cancel.png"> <img src="img/admin/btn_cancel_hover.png" class="over"></a>
+				</div>
+			</div>
+			<!-- 2-사용자 정보 등록.E -->
+
+			<!-- 3-사용자 환경설정.S -->
+			<div id="view3" class="settingBox ">
+				<div>
+
+
+				</div>
+			<!-- 3-사용자 환경설정.E -->
+
+		</div>
+		<!-- POPUP --> 
+
+	</div> 
+ 
+ </body>
+</html>
+
+
+
+
+
+

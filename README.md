@@ -1,2 +1,0 @@
-# PracWeb
-html, css, javascript

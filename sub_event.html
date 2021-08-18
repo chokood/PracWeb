@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content=" ">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>Ai VinUS DASHBOARD</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/event.css">
+
+  <link rel="stylesheet" href="font/nanumsquare.css">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+
+  <script type="text/javascript" src="js/tabcontent.js"></script>
+  <script>
+       window.addEventListener('load', function() {
+          var allElements = document.getElementsByTagName('*');
+          Array.prototype.forEach.call(allElements, function(el) {
+              var includePath = el.dataset.includePath;
+              if (includePath) {
+                  var xhttp = new XMLHttpRequest();
+                  xhttp.onreadystatechange = function () {
+                      if (this.readyState == 4 && this.status == 200) {
+                          el.outerHTML = this.responseText;
+                      }
+                  };
+                  xhttp.open('GET', includePath, true);
+                  xhttp.send();
+              }
+          });
+      });
+   </script>
+
+ </head>
+
+ <body>
+	<!-- 전체 wrap.S -->
+	<div class="wrap">  
+
+		<!-- 헤더.S -->
+		<header id="header"> 
+			<div data-include-path="inc_header.html"></div>	
+		</header>
+		<!-- 헤더.E -->
+
+
+		<!-- 내용.S -->		
+		<div class="container">
+
+			<!-- side 영역.S -->
+			<div id="side">
+
+				<!-- 좌측 네비.S -->
+				<div class="btn-navi" >
+					<button type="button" class="btn_object" onClick="location.href='index.html'">객체우선</button>
+					<button type="button" class="btn_evnet_on" onClick="location.href='main_event.html'">이벤트우선</button>
+					<button type="button" class="btn_camera" onClick="location.href='main_camera.html'">카메라우선</button>
+				</div>
+				<!-- 좌측 네비.E -->
+
+				<!-- 실시간 채널.S -->
+				<div data-include-path="inc_side.html"></div>
+				<!-- 실시간 채널.E -->
+				
+			</div>
+			<!-- side 영역.E -->
+
+
+			<!-- 우측 메인.S -->
+			<div id="contentsWrap">
+				<!-- 상단 날짜,버튼 영역.S -->
+				<div class="mainTop">
+					<div class=" dateArea">
+						<a class="rollover" alt="달력" ><img src="img/btn-calendar.png"> <img src="img/btn-calendar_hover.png" class="over"></a>
+						<p class="date">2021년 07월 21일</p>
+						<button type="button" class="btn-date" href="#">◀<!-- <img src="img/btn-calendarLeft.png">--></button>
+						<button type="button" class="btn-date" href="#">▶<!-- <img src="img/btn-calendarRight.png">--></button>
+						<button type="button" class="btn" href="#">오늘</button>
+					</div>
+					<div class="btnArea">
+						<button type="button" class="btn" onClick="location.href='./HTML/Chart/nonoc.html'">차트</button>
+						<button type="button" class="btn" onClick="location.href='./HTML/Grid/grid_ui_test.html'">그리드</button>
+						<a class="rollover" alt="csv파일" ><img src="img/btn-downCSV.png"> <img src="img/btn-downCSV_hover.png" class="over"></a>
+						<a class="rollover" alt="csv파일" ><img src="img/btn-downBMP.png"> <img src="img/btn-downBMP_hover.png" class="over"></a>
+						<a class="rollover" alt="csv파일" ><img src="img/btn-downPrint.png"> <img src="img/btn-downPrint_hover.png" class="over"></a>
+					</div>
+				</div>
+				<!-- 상단 날짜,버튼 영역.E -->
+
+				<!-- 메인컨텐츠.S -->
+				<div class="contents">
+
+					<!-- 섹션 좌측.S -->
+					<div class="sectionBox">
+						<div class="innerBox subEvent">
+							<div class="subTabs">
+								<div class="tabsTitle"><img src="img/navi_event.png"></div>
+						        <ul class="tabs" data-persist="true">
+						            <li><a href="#view1" class="tab-viewTime">시간대별 카메라 정보 상세</a></li>
+						        </ul>
+							</div>
+							<div id="view1" class="data ">
+								<div class="dataSelect">
+									<div class="dataPeriod">
+										<img src="img/sample/_sample-date.png">
+									</div>
+									<div class="dataCheck alignL">
+										<div class="sub-btnArea">
+											<a class="rollover" alt="csv파일" ><img src="img/btn_setAll_on.png"> <img src="img/btn_setAll_on.png" class="over"></a>
+											<a class="rollover" alt="csv파일" ><img src="img/btn_setChoice.png"> <img src="img/btn_setChoice_on.png" class="over"></a>
+										</div>
+										<form class="checkbox" >
+										    <input type="checkbox" name=""><label>이벤트</label>
+										    <input type="checkbox" name=""><label>객체</label>
+										</form>
+									</div>
+									<div class="corlorGuide alignR">
+										<ul>
+											<li><div class="colorBox cBG-Intrusion"></div> <div class="guideTXT">침입</div></li>
+											<li><div class="colorBox cBG-Loitering"></div> <div class="guideTXT">배회</div></li>
+											<li><div class="colorBox cBG-Counting"></div> <div class="guideTXT">카운팅</div></li>
+											<li><div class="colorBox cBG-Intrusion"></div> <div class="guideTXT">쓰러짐</div></li>
+											<li><div class="colorBox cBG-Human"></div> <div class="guideTXT">사람</div></li>
+											<li><div class="colorBox cBG-Face"></div> <div class="guideTXT">얼굴</div></li>
+											<li><div class="colorBox cBG-Car"></div> <div class="guideTXT">차량</div></li>
+											<li><div class="colorBox cBG-LPR"></div> <div class="guideTXT">차량번호 인식</div></li>
+										</ul>
+									</div>
+								</div>
+								<div style="display:block; height:100%; vertical-alogn:top; border:1px solid gray"> 그리드 영역<br /><br /><br /><br /><br /><br />
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- 섹션 좌측.E -->
+
+					<!-- 섹션 우측.S -->
+					<div class="sectionBox">
+						<div class="innerBox divEventAge">
+							<div class="contentsTitle">
+								<div class="title">
+									<h4>연령별 출입자 현황</h4>
+								</div>
+								<div class="partBTN">
+									<button type="button" class="btn-dataCapture" >Ξ</a>
+								</div>
+							</div>
+							<div class="data01">
+								<img src="img/sample/_sample-diagram04.png">
+							</div>
+
+							<div class="data02">
+								<p>마스크 착용 비율</p>
+								<img src="img/sample/_sample-diagram05.png">
+							</div>
+						</div>	
+	
+						<div class="clearfix innerBox divTop10">
+							<div class="contentsTitle">
+								<div class="title">
+									<h4>최다검지 카메라 TOP10 CH</h4>
+								</div>
+								<div class="partBTN">
+									<a class="changeGraph" ><img src="img/btn_human_on.png"><img src="img/btn_human_on.png" class="over"></a>
+									<a class="changeGraph" ><img src="img/btn_car.png"> <img src="img/btn_car_on.png" class="over"></a>
+									<button type="button" class="btn-dataCapture" >Ξ</a>
+								</div>
+							</div>
+							<div class="data">
+								<!--  테이블 영역.S -->
+								
+								<!--  테이블 영역.E -->
+							</div>
+						</div>
+					</div>	
+					<!-- 섹션 우측.E -->
+				</div>
+				<!-- 메인컨텐츠.E -->
+				<div id="bottom">
+					<p class="Notice">※ 화면에 표시되는 모든 실시간 데이터는 1분마다 자동으로 업데이트 합니다. 다만 “시간대별 현황” 그래프의 실시간 데이터는 정시에 한 번씩 업데이트 합니다.</p>
+					<div class="madeFodics">포딕스시스템</div>
+				</div>
+			</div>
+			<!-- 우측 메인.E -->
+
+		</div>
+		<!--  내용.E -->
+	</div>
+	<!-- 전체 wrap.E -->
+ </body>
+</html>

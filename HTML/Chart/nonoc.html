@@ -1,0 +1,1791 @@
+<!doctype html>
+<html>
+    <head>
+        <title>TOAST UI - Chart Test</title>
+        <meta charset="utf-8">        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
+        <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
+        <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.css" />
+        <script src="https://uicdn.toast.com/chart/latest/toastui-chart.js"></script>        
+        <link rel="stylesheet" href="../../css/style_graph.css" />     
+        <link rel="stylesheet" href="../../node_modules/tui-grid/dist/tui-grid.min.css">
+        <script src="../../node_modules/tui-grid/dist/tui-grid.min.js"></script>      
+        <script type="text/javascript" src="../../data/pie_data.js"></script>  
+        </head>
+    </head>
+    <script>
+        const chart = toastui.Chart;
+
+        var size = {                                      // 그래프 출력 크기를 지정
+        width: ( window.innerWidth || document.body.clientWidth ) * 1/2,
+        height: ( window.innerHeight || document.body.clientHeight ) * 1/2
+        }
+
+        window.onload = function () {
+            LoadLineChart();
+            LoadSpLineChart(); 
+            LoadMultiLineChart(); 
+
+            LoadPieChart();
+            LoadPieDonutChart();
+            LoadPieNoLegendChart();   
+
+            LoadBarChart();
+            LoadBarDualChart();
+            LoadBulletChart();
+            LoadColumnChart1();
+            LoadColumnLineChart1();
+            LoadColumnChart2();
+            LoadColumnLineChart2();
+            LoadHeatmapChart();
+
+            LoadRaderChart();
+            LoadRaderBlackChart();
+            LoadRadialBarChart1();
+            LoadRadialBarChart2();   
+        }
+
+        function LoadLineChart(){
+            const el = document.getElementById('chart_line');    
+            const data = {
+                categories: [
+                '01/01/2020',
+                '02/01/2020',
+                '03/01/2020',
+                '04/01/2020',
+                '05/01/2020',
+                '06/01/2020',
+                '07/01/2020',
+                '08/01/2020',
+                '09/01/2020',
+                '10/01/2020',
+                '11/01/2020',
+                '12/01/2020',
+                '01/01/2019',
+                '02/01/2019',
+                '03/01/2019',
+                '04/01/2019',
+                '05/01/2019',
+                '06/01/2019',
+                '07/01/2019',
+                '08/01/2019',
+                '09/01/2019',
+                '10/01/2019',
+                '11/01/2019',
+                '12/01/2019',
+                ],
+                series: [
+                {
+                    name: 'Seoul',
+                    data: [-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 25.9, 27.2, 24.4, 13.9, 6.6, -0.6,-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 25.9, 27.2, 24.4, 13.9, 6.6, -0.6],
+                },
+                {
+                    name: 'Seattle',
+                    data: [3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0, 10.6, 6.6, 3.7,3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0, 10.6, 6.6, 3.7],
+                },
+                {
+                    name: 'Tokyo',
+                    data: [3, 5, 7, 9, 10, 15, 17, 17, 15, 10, 6, 2, 2, 5, 7.0, 9, 12, 15, 14, 17, 15.0, 10, 6, 3],
+                },
+                ],        
+            }
+        
+            const options = {        
+            chart: { 
+                width: size.width,        // 출력 그래프 크기 Width
+                height: size.height,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },       
+            exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },    
+            xAxis: {
+                title: 'value',           // X축 명칭 출력                              
+                date: { format: 'YYYY-MM-DD' }, // or true    // DATE 출력 포맷
+                //label: {                // 라벨 조정시
+                //interval: 10          // 몇칸에 한번씩 X라벨을 출력할 것인가?
+                //},      
+            },
+            yAxis: {
+                title: 'date',            // Y축 명칭 출력 
+                color: 'green',      
+            },      
+            series: {
+                spline: true,             // spline 부드러움 처리
+            },
+            legend: {
+                align: 'bottom',          // legend 출력 위치
+            },
+            theme:{
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                },  
+                xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)
+                title: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,
+                    //fontWeight: 400,
+                    color: 'lightgray'
+                },
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    //fontWeight: 700,
+                    color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+                },
+                yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)
+                title: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,
+                    //fontWeight: 400,
+                    color: 'lightgray'
+                },
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    //fontWeight: 700,
+                    color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+                },
+                legend: {                  // Legend 폰트 관련
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    //fontWeight: 700,
+                    color: 'darkgray'
+                }
+                },
+                plot: {                   // 그래프 내부 라인처리
+                vertical: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1,           
+                },
+                horizontal: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1, 
+                },        
+                }
+            },
+            };    
+            chart.lineChart({ el, data, options });  
+        }
+
+
+        function LoadSpLineChart(){
+        const el = document.getElementById('chart_spline');
+        
+        const data = {
+            categories: [
+                '01/01/2020',
+                '02/01/2020',
+                '03/01/2020',
+                '04/01/2020',
+                '05/01/2020',
+                '06/01/2020',
+                '07/01/2020',
+                '08/01/2020',
+                '09/01/2020',
+                '10/01/2020',
+                '11/01/2020',
+                '12/01/2020',
+                '01/01/2019',
+                '02/01/2019',
+                '03/01/2019',
+                '04/01/2019',
+                '05/01/2019',
+                '06/01/2019',
+                '07/01/2019',
+                '08/01/2019',
+                '09/01/2019',
+                '10/01/2019',
+                '11/01/2019',
+                '12/01/2019',
+            ],
+            series: [
+                {
+                name: 'Seoul',
+                data: [-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 25.9, 27.2, 24.4, 13.9, 6.6, -0.6,-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 25.9, 27.2, 24.4, 13.9, 6.6, -0.6],
+                },
+                {
+                name: 'Seattle',
+                data: [3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0, 10.6, 6.6, 3.7,3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0, 10.6, 6.6, 3.7],
+                },
+                {
+                name: 'Tokyo',
+                data: [3, 5, 7, 9, 10, 15, 17, 17, 15, 10, 6, 2, 2, 5, 7.0, 9, 12, 15, 14, 17, 15.0, 10, 6, 3],
+                },
+            ],        
+            }
+        
+        var theme1 = {      
+                
+        }
+            
+        const options = {        
+            chart: { 
+            width: size.width,        // 출력 그래프 크기 Width
+            height: size.height,      // 출력 그래프 크기 Height
+            animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },  
+            exportMenu: {
+            visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },    
+            xAxis: {
+            title: 'value',           // X축 명칭 출력                              
+            date: { format: 'YYYY-MM-DD' }, // or true    // DATE 출력 포맷
+            //label: {                // 라벨 조정시
+                //interval: 10          // 몇칸에 한번씩 X라벨을 출력할 것인가?
+            //},      
+            },
+            yAxis: {
+            title: 'date',            // Y축 명칭 출력 
+            color: 'green',      
+            },         
+            legend: {
+            align: 'bottom',          // legend 출력 위치
+            },
+            theme:{
+            chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+            },  
+            xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)
+                title: {
+                fontFamily: 'vedana',
+                fontSize: 12,
+                //fontWeight: 400,
+                color: 'lightgray'
+                },
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 10,
+                //fontWeight: 700,
+                color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+            },
+            yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)
+                title: {
+                fontFamily: 'vedana',
+                fontSize: 12,
+                //fontWeight: 400,
+                color: 'lightgray'
+                },
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 10,
+                //fontWeight: 700,
+                color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+            },
+            legend: {                  // Legend 폰트 관련
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 10,
+                //fontWeight: 700,
+                color: 'darkgray'
+                }
+            },
+            plot: {                   // 그래프 내부 라인처리
+                vertical: {
+                lineColor: 'rgba(60, 80, 180, 0.3)',
+                lineWidth: 1,           
+                },
+                horizontal: {
+                lineColor: 'rgba(60, 80, 180, 0.3)',
+                lineWidth: 1, 
+                },        
+            }
+            },
+        };     
+        chart.lineChart({ el, data, options });    
+        }
+
+        function LoadMultiLineChart()
+        {
+        const el = document.getElementById('chart_multi_line');
+        
+        const data = {
+            categories: [
+                '01/01/2020',
+                '02/01/2020',
+                '03/01/2020',
+                '04/01/2020',
+                '05/01/2020',
+                '06/01/2020',
+                '07/01/2020',
+                '08/01/2020',
+                '09/01/2020',
+                '10/01/2020',
+                '11/01/2020',
+                '12/01/2020',
+                '01/01/2019',
+                '02/01/2019',
+                '03/01/2019',
+                '04/01/2019',
+                '05/01/2019',
+                '06/01/2019',
+                '07/01/2019',
+                '08/01/2019',
+                '09/01/2019',
+                '10/01/2019',
+                '11/01/2019',
+                '12/01/2019',
+            ],
+            series: [
+                {
+                name: 'Seoul',
+                data: [-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 25.9, 27.2, 24.4, 13.9, 6.6, -0.6,-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 25.9, 27.2, 24.4, 13.9, 6.6, -0.6],
+                },
+                {
+                name: 'Seattle',
+                data: [3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0, 10.6, 6.6, 3.7,3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0, 10.6, 6.6, 3.7],
+                },
+                {
+                name: 'Tokyo',
+                data: [3, 5, 7, 9, 10, 15, 17, 17, 15, 10, 6, 2, 2, 5, 7.0, 9, 12, 15, 14, 17, 15.0, 10, 6, 3],
+                },
+                {
+                name: 'China',
+                data: [13, 15, 17, 19, 20, 25, 27, 27, 15, 20, 16, 12, 12, 15, 17, 19, 22, 25, 24, 27, 10.0, 20, 16, 13],
+                },
+            ],        
+            }
+            
+        const options = {        
+            chart: { 
+            width: size.width,        // 출력 그래프 크기 Width
+            height: size.height,      // 출력 그래프 크기 Height
+            animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },  
+            exportMenu: {
+            visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },    
+            xAxis: {
+            title: 'value',           // X축 명칭 출력                              
+            date: { format: 'YYYY-MM-DD' }, // or true    // DATE 출력 포맷
+            //label: {                // 라벨 조정시
+                //interval: 10          // 몇칸에 한번씩 X라벨을 출력할 것인가?
+            //},      
+            },
+            yAxis: {
+            title: 'date',            // Y축 명칭 출력 
+            color: 'green',      
+            },         
+            legend: {
+            align: 'bottom',          // legend 출력 위치
+            },
+            series: {
+            showDot: true
+            },
+            theme:{
+            chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+            },  
+            xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)
+                title: {
+                fontFamily: 'vedana',
+                fontSize: 12,
+                //fontWeight: 400,
+                color: 'lightgray'
+                },
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 10,
+                //fontWeight: 700,
+                color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+            },
+            yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)
+                title: {
+                fontFamily: 'vedana',
+                fontSize: 12,
+                //fontWeight: 400,
+                color: 'lightgray'
+                },
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 10,
+                //fontWeight: 700,
+                color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+            },
+            legend: {                  // Legend 폰트 관련
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 10,
+                //fontWeight: 700,
+                color: 'darkgray'
+                }
+            },
+            plot: {                   // 그래프 내부 라인처리
+                vertical: {
+                lineColor: 'rgba(60, 80, 180, 0.3)',
+                lineWidth: 1,           
+                },
+                horizontal: {
+                lineColor: 'rgba(60, 80, 180, 0.3)',
+                lineWidth: 1, 
+                },        
+            }
+            },
+        };    
+        chart.lineChart({ el, data, options });      
+        }
+        function LoadPieChart()
+        {
+            const el = document.getElementById('chart_pie');
+            
+            var data = pieData1;          // data 변수에 왜 넣어줘야 되지? 안넣어주면 PieGraph가 그려지지 않음.
+            const options = {
+            chart: { 
+                width: size.width,        // 출력 그래프 크기 Width
+                height: size.height,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },  
+            exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },
+
+            theme:{
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                },         
+                legend: {                   // Legend 폰트 관련          
+                label: {            
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    //fontWeight: 700,
+                    color: 'darkgray'
+                }
+                },        
+            }, 
+            series: {
+                dataLabels: {               // 데이터 출력 라벨
+                visible: true,
+                pieSeriesName: { visible: false }
+                },
+                selectable: true            // SELECT = TRUE를 지정해야만 정상적으로 Select 처리가 된다. 
+            }    
+            };
+            const chart_pie = chart.pieChart({ el, data, options }); 
+            
+            chart_pie.on('selectSeries', (ev) => {      // 선택시 상자 출력
+                const { label, value } = ev.pie[0].data;
+                alert(`${label}: ${value}`);
+            });   
+        }
+
+        function LoadPieDonutChart()
+        {
+        const el = document.getElementById('chart_pie_donut');
+            const data = {
+                categories: ['Browser'],
+                series: [
+                {
+                    name: 'Chrome',
+                    data: 46.02,
+                },
+                {
+                    name: 'IE',
+                    data: 20.47,
+                },
+                {
+                    name: 'Firefox',
+                    data: 17.71,
+                },
+                {
+                    name: 'Safari',
+                    data: 5.45,
+                },
+                {
+                    name: 'Opera',
+                    data: 3.1,
+                },
+                {
+                    name: 'Etc',
+                    data: 7.25,
+                }
+                ]
+            }
+            
+            const options = {
+            chart: { 
+                width: size.width, 
+                height: size.height,     
+                title: {
+                text: 'Donut',    // 출력 텍스트 & 가운데 출력
+                offsetX: -70,
+                offsetY: 220,     
+                align:'center'   
+                },  
+                animation: false
+            },        // 출력 그래프 크기
+            exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },
+            theme:{   
+                title: { 
+                fontFamily: 'Verdana',     // 출력 텍스트 색상, 폰트 페밀리, 크기 굵기
+                fontSize: 45,
+                fontWeight: 100,    
+                color: '#ff416d'
+                },      
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                },         
+                legend: {                   // Legend 폰트 관련          
+                label: {            
+                    fontFamily: 'vedana',
+                    fontSize: 10,            
+                    color: 'darkgray'
+                }
+                },        
+            }, 
+            series: {
+                dataLabels: {               // 데이터 출력 라벨
+                visible: true,
+                pieSeriesName: { visible: false }
+                },
+                radiusRange: {              // 도우넛 설정 INNER / OUTER
+                inner: '40%',
+                outer: '100%',
+                },
+            }    
+            };    
+            chart.pieChart({ el, data, options }); 
+        }
+
+        function LoadPieNoLegendChart()
+        {
+            const el = document.getElementById('chart_pie_not_legend');
+            const data = {
+                categories: ['Browser'],
+                series: [
+                {
+                    name: 'Chrome',
+                    data: 46.02,
+                },
+                {
+                    name: 'IE',
+                    data: 20.47,
+                },
+                {
+                    name: 'Firefox',
+                    data: 17.71,
+                },
+                {
+                    name: 'Safari',
+                    data: 5.45,
+                },
+                {
+                    name: 'Opera',
+                    data: 3.1,
+                },
+                {
+                    name: 'Etc',
+                    data: 7.25,
+                }
+                ]
+            }
+            
+            const options = {
+            chart: { 
+                width: size.width,        // 출력 그래프 크기 Width
+                height: size.height,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },  
+            exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },
+
+            theme:{
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                width:'50%'
+                },         
+                    
+            }, 
+            legend: {                   
+                    visible:false          // LEGEND 출력하지 않는 그래프     
+            }, 
+            series: {
+                dataLabels: {               // 데이터 출력 라벨
+                visible: true,
+                pieSeriesName: { visible: false }
+                }
+            },
+            
+            yAxis: {          // 공간 칸 띄우기
+                width: 150,
+                height: 400
+            },
+            plot: {           // 실제 원그래프 공간        
+                width: 300,
+                height: 300
+            }   
+            };
+            
+            chart.pieChart({ el, data, options }); 
+        }
+
+        function LoadBarChart()
+        {
+            const el = document.getElementById('chart_bar');
+            const data = {
+                categories: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                series: [
+                {
+                    name: 'Budget',
+                    data: [5000, 3000, 5000, 7000, 6000, 4000, 1000]
+                },
+                {
+                    name: 'Income',
+                    data: [8000, 4000, 7000, 2000, 6000, 3000, 5000]
+                },
+                {
+                    name: 'Expenses',
+                    data: [4000, 4000, 6000, 3000, 4000, 5000, 7000]
+                },
+                {
+                    name: 'Debt',
+                    data: [3000, 4000, 3000, 1000, 2000, 4000, 3000]
+                }
+                ]
+            }
+            
+            const options = {        
+                chart: { 
+                width: size.width * 1.5,        // 출력 그래프 크기 Width
+                height: size.height * 2/3,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+                },               
+                exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+                }, 
+                series: {
+                stack: true,         
+                },   
+                xAxis: {
+                title: 'value',           // X축 명칭 출력                              
+                date: { format: 'YYYY-MM-DD' }, // or true    // DATE 출력 포맷
+                //label: {                // 라벨 조정시
+                    //interval: 10          // 몇칸에 한번씩 X라벨을 출력할 것인가?
+                //},      
+                },
+                yAxis: {
+                title: 'date',            // Y축 명칭 출력 
+                color: 'green',      
+                },
+                legend: {
+                align: 'bottom',          // legend 출력 위치
+                },
+                theme:{
+                chart:{
+                    fontFamily: 'vedana',     // 그래프 폰트             
+                    backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                },  
+                series:{
+                    barWidth: 10,             // 출력바 굵기 체크.
+                },
+                xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)
+                    title: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,             
+                    color: 'lightgray'
+                    },
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,             
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)
+                    title: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,              
+                    color: 'lightgray'
+                    },
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                legend: {                  // Legend 폰트 관련
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                    }
+                },
+                plot: {                   // 그래프 내부 라인처리
+                    vertical: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1,           
+                    },
+                    horizontal: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1, 
+                    },        
+                }
+                },
+            };    
+            chart.barChart({ el, data, options }); 
+        }
+
+
+        function LoadBarDualChart()
+        {
+            const el = document.getElementById('chart_bar_dual');  
+            const data = {
+            categories: [
+                '0 ~ 9',
+                '10 ~ 19',
+                '20 ~ 29',
+                '30 ~ 39',
+                '40 ~ 49',
+                '50 ~ 59',
+                '60 ~ 69',
+                '70 ~ 79',
+                '80 ~ 89',
+                '90 ~ 99',
+                '100 ~',
+                '110 ~',
+                '120 ~',
+                        
+            ],
+            series: [
+                {
+                name: 'Male - Seoul',
+                data: [4007, 5067, 7221, 8358, 8500, 7730, 4962, 2670, 6700, 776, 131, 500, 1000],
+                stackGroup: 'Male',  
+                },
+                {
+                name: 'Female - Seoul',
+                data: [3805, 4728, 7244, 8291, 8530, 8126, 5483, 3161, 1274, 2217, 377, 100, 2000],
+                stackGroup: 'Female',
+                },
+                {
+                name: 'Male - Incheon',
+                data: [1392, 1671, 2092, 2339, 2611, 2511, 1277, 6145, 1713, 1974, 194, 3000, 3000],
+                stackGroup: 'Male',
+                },
+                {
+                name: 'Female - Incheon',
+                data: [1320, 1558, 1927, 2212, 2556, 2433, 1304, 8076, 3800, 6057, 523, 2000, 4000],
+                stackGroup: 'Female',
+                },
+                {
+                name: 'Female - Incheon2',
+                data: [320, 1558, 1927, 2212, 2556, 2433, 1304, 8076, 3800, 6057, 523, 2000, 4000],
+                stackGroup: 'Male',
+                },
+                {
+                name: 'Female - Incheon3',
+                data: [125, 1558, 1927, 2212, 2556, 2433, 1304, 8076, 3800, 6057, 523, 2000, 4000],
+                stackGroup: 'Female',
+                },        
+            ],
+            };
+            
+            const options = {        
+            chart: { 
+                width: size.width * 1.5,        // 출력 그래프 크기 Width
+                height: size.height + 200,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },               
+            exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            }, 
+            series: {
+                stack: true,        
+            },   
+            xAxis: {
+                title: 'value',           // X축 명칭 출력  
+            },
+            yAxis: {
+                title: 'date',            // Y축 명칭 출력        
+            },
+            legend: {  
+                visible:false      
+                //align: 'top',          // legend 출력 위치
+                //left: 100,
+                //width: 100,
+                //maxWidth: 400,
+                //item: {
+                //width: 70,
+                //overflow: 'ellipsis',
+                //}
+            },
+            theme:{        
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                },  
+                series:{
+                colors: ['#EDAE49', '#D1495B', '#00798C', '#30638E', '#00498C', '#306100'],       // 바 색상 지정 <색상을 해당 theme series>에서만 변경 가능
+                },
+                xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)
+                title: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,             
+                    color: 'lightgray'
+                },
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,             
+                    color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+                },
+                yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)
+                title: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,              
+                    color: 'lightgray'
+                },
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+                },
+                legend: {                  // Legend 폰트 관련
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                },   
+                
+                },
+                plot: {                   // 그래프 내부 라인처리
+                vertical: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1,           
+                },
+                horizontal: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1, 
+                },        
+                }
+            },
+            };    
+            
+            chart.barChart({ el, data, options }); 
+        }
+
+        function LoadBulletChart()
+        {
+            const el = document.getElementById('chart_bullet');
+            const data = {
+            series: [
+                {
+                name: '자동차',
+                data: 25,
+                
+                },
+                {
+                name: '버스',
+                data: 11,
+                
+                },
+                {
+                name: '트럭',
+                data: 30,
+                
+                },
+                {
+                name: '오토바이',
+                data: 23,
+                
+                },
+                {
+                name: '자전거',
+                data: 23,
+                
+                }
+            ],
+            };
+            
+            const options = {        
+                chart: { 
+                width: size.width,        // 출력 그래프 크기 Width
+                height: size.height,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+                },               
+                exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+                },                  
+                legend: {
+                align: 'bottom',          // legend 출력 위치
+                },
+                series: {          
+                dataLabels: {
+                    visible: true,                     
+                },
+                vertical: true  
+                },        
+                theme:{        
+                chart:{
+                    fontFamily: 'vedana',     // 그래프 폰트             
+                    backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                },  
+                series:{
+                    colors: ['#EDAE49', '#D1495B', '#00798C', '#30638E', '#00639A'],       // 바 색상 지정 <색상을 해당 theme series>에서만 변경 가능
+                    dataLabels: {                                               // 각 컬럼 차트 상단에 수량 표기
+                    fontFamily: 'Impact',         
+                    fontSize: 14,
+                    color: '#ffffff',
+                    textBubble: {                                             // 풍선 라벨
+                        visible: true,                
+                        borderRadius: 7,
+                        borderWidth: 2,
+                        borderColor: 'darkgray',
+                        backgroundColor: '#0f73a2',
+                    },
+                    },
+                    barWidth: 120,             // 출력바 굵기 체크.           
+                },             
+                xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 14,             
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 14,
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                legend: {                  // Legend 폰트 관련
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 14,
+                    color: 'darkgray'
+                    },         
+                },
+                plot: {                   // 그래프 내부 라인처리
+                    vertical: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1,           
+                    },
+                    horizontal: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1, 
+                    },        
+                },          
+                },
+            };   
+            chart.bulletChart({ el, data, options }); 
+        }
+
+
+        function LoadColumnChart1()
+        {   
+            const el = document.getElementById('chart_column1');
+            const data = {
+            categories: ['카운팅', '침입', '배회', '마스크미착용'],
+            series: {
+                column: [
+                {
+                    name: '오늘',
+                    data: [800, 30, 580, 0],
+                    stackGroup: 'Today',
+                },
+                ],
+                line: [
+                {
+                    name: '일주전',
+                    data: [500, 0, 600, 0],
+                    stackGroup: 'OneWeeks',         
+                }, 
+                {
+                    name: '어제',
+                    data: [900, 30, 100, 0],
+                    stackGroup: 'Yesterday',         
+                },    
+                ],
+            }
+            }
+            
+            const options = {        
+                chart: { 
+                width: size.width,        // 출력 그래프 크기 Width
+                height: size.height,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+                },               
+                exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+                },                  
+                legend: {
+                align: 'bottom',          // legend 출력 위치
+                }, 
+                
+                theme:{        
+                chart:{
+                    fontFamily: 'vedana',     // 그래프 폰트             
+                    backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                }, 
+                series:{
+                    barWidth: 50,             // 출력바 굵기 체크.
+                },       
+                xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,             
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                legend: {                  // Legend 폰트 관련
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                    },         
+                },
+                plot: {                   // 그래프 내부 라인처리
+                    vertical: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1,           
+                    },
+                    horizontal: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1, 
+                    },        
+                }
+                },
+            };   
+            chart.columnLineChart({ el, data, options });   
+        }
+
+        function LoadColumnLineChart1()
+        {
+        const el = document.getElementById('chart_columnline1');
+        const data = {
+            categories: [
+            '카운팅',
+            '침입',
+            '배회',
+            '마스크 미착용',        
+            ],
+            series: {
+            area: [
+                {
+                name: '1주 전',
+                data: [5000, 3000, 3200, 4000],
+                },
+                {
+                name: '오늘',
+                data: [8000, 4000, 1000, 3000],
+                },
+            ],
+            line: [
+                {
+                name: '어제',
+                data: [8000, 4000, 1000, 500],
+                },        
+            ],
+            },      
+        };
+        const options = {        
+            chart: { 
+            width: size.width,        // 출력 그래프 크기 Width
+            height: size.height,      // 출력 그래프 크기 Height
+            animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },               
+            exportMenu: {
+            visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },                  
+            legend: {
+            align: 'bottom',          // legend 출력 위치
+            }, 
+            series: {
+            stack: true
+            },       
+            theme:{        
+            chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+            }, 
+                        
+            xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 14,             
+                color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+            },
+            yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 14,
+                color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+            },
+            legend: {                  // Legend 폰트 관련
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 14,
+                color: 'darkgray'
+                },         
+            },
+            plot: {                   // 그래프 내부 라인처리
+                vertical: {
+                lineColor: 'rgba(60, 80, 180, 0.3)',
+                lineWidth: 1,           
+                },
+                horizontal: {
+                lineColor: 'rgba(60, 80, 180, 0.3)',
+                lineWidth: 1, 
+                },        
+            }
+            },
+        };          
+        chart.lineAreaChart({ el, data, options }); 
+        }
+
+        function LoadColumnChart2()
+        {
+            const el = document.getElementById('chart_column2');
+            const data = {
+            categories: ['모자착용', '안경착용', '마스크착용'],
+            series: [
+                {
+                name: '남자',
+                data: [5000, 3000, 3200],
+                stackGroup: 'Male',
+                },
+                {
+                name: '여자',
+                data: [8000, 4000, 1000],
+                stackGroup: 'Female',
+                },        
+            ]
+            }
+            
+            const options = {        
+                chart: { 
+                width: size.width,        // 출력 그래프 크기 Width
+                height: size.height,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+                },               
+                exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+                },                  
+                legend: {
+                align: 'bottom',          // legend 출력 위치
+                }, 
+                series: {
+                stack: true
+                },       
+                theme:{        
+                chart:{
+                    fontFamily: 'vedana',     // 그래프 폰트             
+                    backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                }, 
+                            
+                xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,             
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                legend: {                  // Legend 폰트 관련
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                    },         
+                },
+                plot: {                   // 그래프 내부 라인처리
+                    vertical: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1,           
+                    },
+                    horizontal: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1, 
+                    },        
+                }
+                },
+            };   
+            chart.columnChart({ el, data, options });     
+        }
+
+        function LoadColumnLineChart2()
+        {
+            const el = document.getElementById('chart_columnline2');
+            const data = {
+            categories: ['모자착용', '안경착용', '마스크착용'],
+            series: {
+                column : [
+                {
+                    name: '남자',
+                    data: [5000, 3000, 6000],
+                },
+
+                ],
+                
+                line : [
+                {
+                    name: '여자',
+                    data: [8000, 4000, 7000],           
+                },                
+                ],         
+            },
+            }
+            
+            const options = {        
+                chart: { 
+                width: size.width,        // 출력 그래프 크기 Width
+                height: size.height,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+                },               
+                exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+                },                  
+                legend: {
+                align: 'bottom',          // legend 출력 위치
+                }, 
+                series: {
+                stack: true
+                },       
+                theme:{        
+                chart:{
+                    fontFamily: 'vedana',     // 그래프 폰트             
+                    backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                }, 
+                            
+                xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,             
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                    },
+                    width: 1,
+                    color: 'gray'
+                },
+                legend: {                  // Legend 폰트 관련
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 10,
+                    color: 'darkgray'
+                    },         
+                },
+                plot: {                   // 그래프 내부 라인처리
+                    vertical: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1,           
+                    },
+                    horizontal: {
+                    lineColor: 'rgba(60, 80, 180, 0.3)',
+                    lineWidth: 1, 
+                    },        
+                }
+                },
+            };   
+            chart.columnLineChart({ el, data, options });     
+        }
+
+
+        function LoadHeatmapChart()
+        {
+            const el = document.getElementById('chart_heatmap');
+            const data = {
+                categories: {
+                x: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12','13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24'],
+                y: ['Seoul', 'Seattle', 'Sydney', 'Moscow', 'Jungfrau'],
+                },
+                series: [
+                [-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 24.9, 25.2, 20.4, 13.9, 6.6, -0.6,-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 24.9, 25.2, 20.4, 13.9, 6.6, -0.6],
+                [3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0, 10.6, 6.4, 3.7,3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0, 10.6, 6.4, 3.7],
+                [22.1, 22.0, 20.9, 18.3, 15.2, 12.8, 11.8, 13.0, 15.2, 17.6, 19.4, 21.2,-10.3, -9.1, -4.1, 4.4, 25.2, 16.3, 18.5, 16.7, 10.9, 4.2, -2.0, -7.5],
+                [-10.3, -9.1, -4.1, 4.4, 12.2, 16.3, 18.5, 16.7, 10.9, 4.2, -2.0, -7.5,-10.3, -9.1, -4.1, 4.4, 12.2, 16.3, 18.5, 16.7, 10.9, 4.2, -2.0, -7.5],
+                [-13.2, -13.7, -13.1, -10.3, -6.1, -3.2, 0.0, -0.1, -1.8, -4.5, -9.0, -10.9,3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0, 10.6, 6.4, 3.7],          
+                ],
+            }
+                
+            const theme = {
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                }, 
+                
+                series: {                 // 시작 색상, 끝색상.
+                //startColor: '#4A76B2',
+                //endColor: '#221271',
+                },    
+                xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,             
+                    color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+                },
+                yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)           
+                label: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,
+                    color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+                },
+                legend: {
+                visible: false,
+                label: {              
+                    color: 'blue',        // Spectrum Legend 를 사용한다고 하는데 사용법 기술이 없음.
+                },
+                color: 'blue',            
+                },  
+            }
+
+            const options = {        
+                chart: { 
+                width: size.width,        // 출력 그래프 크기 Width
+                height: size.height,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+                },               
+                exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+                },                  
+                legend: {         
+                align: 'bottom',          // legend 출력 위치 
+                visible: false,
+                },
+                theme,  
+            }; 
+            
+            chart.heatmapChart({ el, data, options }); 
+        }
+
+        function LoadRaderChart()
+        {
+            const el = document.getElementById('chart_rader');
+            const data = {
+                categories: ['미성년', '청년', '중.장년', '노년', ],
+                series: [
+                {
+                    name: '남자',
+                    data: [5000, 3000, 5000, 7000],            
+                },          
+                {
+                    name: '여자',
+                    data: [2000, 5000, 3000, 1000],
+                },          
+                ],
+            };
+            
+            const options = {        
+                chart: {           
+                width: size.width,        // 출력 그래프 크기 Width
+                height: size.height,      // 출력 그래프 크기 Height
+                animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+                },               
+                exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+                },                  
+                legend: {
+                align: 'bottom',          // legend 출력 위치
+                },  
+                series: {
+                showArea: true
+                }, 
+            
+                tick:
+                {         
+                interval: 3,         
+                },
+                theme:{ 
+                legend: {                  // Legend 폰트 관련
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,
+                    color: 'black'
+                    },         
+                },                 
+                },
+            };     
+            chart.radarChart({ el, data, options }); 
+        }
+
+        function LoadRaderBlackChart()
+        {  
+            const el = document.getElementById('chart_rader_black');
+            const data = {
+                categories: ['미성년', '청년', '중.장년', '노년', ],
+                series: [
+                {
+                    name: '남자',
+                    data: [5000, 3000, 5000, 7000],            
+                },          
+                {
+                    name: '여자',
+                    data: [2000, 5000, 3000, 1000],
+                },          
+                ],
+            };      
+            const options = {        
+                chart: {           
+                width: size.width,        // 출력 그래프 크기 Width
+                height: size.height,      // 출력 그래프 크기 Height
+                animation: false,          // 출력시 애니매이션 효과 비활성 : 기본           
+                },               
+                exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+                },                  
+                legend: {
+                align: 'bottom',          // legend 출력 위치
+                },  
+                series: {
+                showArea: true
+                },  
+                plot:{
+                type: 'circle',
+                },
+                theme:{                    
+                chart:{                                       
+                    backgroundColor: 'rgba(30,30,30,1)',  // 그래프 배경색   
+                    color: 'white'     
+                },  
+                series:{       
+                    colors: ['orange', 'blue'],            
+                },           
+                circularAxis: {              
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,
+                    color: 'white',              
+                    },        
+                },  
+                verticalAxis:{        // 세로로 내려오는 값 (Y Axis)
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 9,
+                    color: 'gray',                            
+                    },  
+                },
+                legend: {                  // Legend 폰트 관련
+                    label: {
+                    fontFamily: 'vedana',
+                    fontSize: 12,
+                    color: 'white'
+                    },         
+                },         
+                },
+            };     
+            chart.radarChart({ el, data, options }); 
+        }
+
+        function LoadRadialBarChart1()
+        {
+        const el = document.getElementById('chart_radial_bar1');
+        const data = {
+            categories: ['남자', '여자'],
+            series: [
+            {
+                name: '미성년',
+                data: [105, 92]
+            },
+            {
+                name: '청년',
+                data: [125, 110]
+            },      
+            {
+                name: '중장년',
+                data: [200, 150]
+            },      
+            {
+                name: '노년',
+                data: [80, 70]
+            },      
+            ],
+        };
+        const options = {           
+            chart: {           
+            width: size.width,        // 출력 그래프 크기 Width
+            height: size.height,      // 출력 그래프 크기 Height
+            animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },               
+            exportMenu: {
+            visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },                  
+            legend: {
+            align: 'bottom',          // legend 출력 위치
+            },  
+            series: { 
+            dataLabels: { visible: false },    
+            radiusRange: {
+                inner: 30,
+                outer: 140,
+            }
+            },     
+            theme:{                    
+            chart:{                                       
+                backgroundColor: 'rgba(30,30,30,1)',  // 그래프 배경색   
+                color: 'white'     
+            }, 
+            series: {
+                dataLabels: {
+                fontFamily: 'white',
+                fontSize: 12,
+                fontWeight: 600,
+                useSeriesColor: true,
+                lineWidth: 2,
+                textStrokeColor: '#ffffff',
+                shadowColor: '#ffffff',
+                shadowBlur: 6
+                }
+            },      
+            circularAxis: {              
+                label: {                   
+                fontFamily: 'vedana',
+                fontSize: 10,
+                color: 'white', 
+                margin: 20        
+                },        
+            },  
+            verticalAxis:{        // 세로로 내려오는 값 (Y Axis)
+                label: {         
+                fontFamily: 'vedana',
+                fontSize: 12,
+                color: 'white',                            
+                },   
+                
+            },
+            legend: {                  // Legend 폰트 관련
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 12,
+                color: 'white'
+                },         
+            },         
+            },
+        };     
+        chart.radialBarChart({ el, data, options });  
+        }
+
+
+        function LoadRadialBarChart2()
+        {
+        const el = document.getElementById('chart_radial_bar2');
+        const data = {
+            categories: ['남자', '여자'],
+            series: [
+            {
+                name: '미성년',
+                data: [105, 92]
+            },
+            {
+                name: '청년',
+                data: [125, 110]
+            },      
+            {
+                name: '중장년',
+                data: [200, 150]
+            },      
+            {
+                name: '노년',
+                data: [80, 70]
+            },      
+            ],
+        };
+        const options = {           
+            chart: {           
+            width: size.width,        // 출력 그래프 크기 Width
+            height: size.height,      // 출력 그래프 크기 Height
+            animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },               
+            exportMenu: {
+            visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },                  
+            legend: {
+            align: 'bottom',          // legend 출력 위치
+            },  
+            series: { 
+            dataLabels: { visible: true },    
+            radiusRange: {
+                inner: 30,
+                outer: 140,
+            }
+            },   
+            
+            theme:{                    
+            chart:{                                       
+                backgroundColor: 'rgba(30,30,30,1)',  // 그래프 배경색   
+                color: 'white'     
+            }, 
+            series: {
+                dataLabels: {
+                fontFamily: 'white',
+                fontSize: 10,
+                fontWeight: 600,
+                useSeriesColor: true,
+                lineWidth: 2,
+                textStrokeColor: '#ffffff',
+                shadowColor: '#ffffff',
+                shadowBlur: 6
+                }
+            },      
+            
+            circularAxis: {              
+                label: {                   
+                fontSize: 0,     
+                },        
+            },
+            verticalAxis:{        // 세로로 내려오는 값 (Y Axis)
+                label: {         
+                fontFamily: 'vedana',
+                fontSize: 12,
+                color: 'white',                            
+                },        
+            },
+            legend: {                  // Legend 폰트 관련
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 12,
+                color: 'white'
+                },         
+            },         
+            },
+        };     
+        chart.radialBarChart({ el, data, options });  
+        }
+    </script>
+
+    <body>            
+        
+        <button type="button" class="button1" onClick="location.href='../../HTML/Chart/ctrlFaceView.html'">객체-얼굴</button><br><br>
+        <button type="button" class="button1" onClick="location.href='../../HTML/Chart/ctrlHumanView.html'">객체-사람</button><br><br>
+        <button type="button" class="button1" onClick="location.href='../../HTML/Chart/ctrlVehicleView.html'">객체-차량</button><br><br>
+        <button type="button" class="button1" onClick="location.href='../../HTML/Chart/evtCountingView.html'">이벤트-카운트</button><br><br>
+        <button type="button" class="button1" onClick="location.href='../../HTML/Chart/evtInvasionView.html'">이벤트-침입</button><br><br>
+        <button type="button" class="button1" onClick="location.href='../../HTML/Chart/evtLoiteringView.html'">이벤트-배회</button><br><br>
+        <button type="button" class="button1" onClick="location.href='../../HTML/Chart/TabCameraView.html'">카메라 탭 1,2</button><br><br>
+                
+        <!-- 라인 -->
+        <h1>SPLine Chart</h1>
+        <div class="chart" id="chart_line"></div>          
+        <h1>Line Chart</h1>
+        <div class="chart" id="chart_spline"></div>   
+        <h1>Line Chart (Circle Point)</h1>
+        <div class="chart" id="chart_multi_line"></div>   
+        
+        <!-- 파이 -->
+        <h1>PIE Chart ( Select function )</h1>
+        <div class="chart" id="chart_pie"></div>  
+        <h1>PIE Donut Chart</h1>
+        <div class="donut-chart" id="chart_pie_donut"></div>  
+        <img class="image-thumbnail" src = "../../img/Chart/men.png"></img>
+        
+        <h1>PIE Chart ( Not legend , ReSize )</h1>
+        <div class="chart" id="chart_pie_not_legend"></div>  
+        <h1>PIE Piece Chart ( ====== Not Support ====== )</h1>        
+        <img src = "../../img/Chart/Pie_None.jpg"></img>
+        <!-- 바 -->
+        <h1>BAR Chart ( Normal )</h1>
+        <div class="chart" id="chart_bar"></div>
+        <h1>BAR Chart ( Dual , Bar Color Change )</h1> 
+        <div style="overflow:auto; width:600px; height:350px;">          
+            <div class="chart" id="chart_bar_dual"></div> 
+        </div>
+        <!-- 컬럼 -->
+        <h1>Bullet Chart</h1>
+        <div class="chart" id="chart_bullet"></div> 
+        <h1>Chart ( ====== Not Support ====== )</h1>
+        <img src = "../../img/Chart/Not4.jpg"></img><span> 라인, 라인에리어, 막대그래프 혼용 불가</span><br><br>
+        
+        <h3>변경안 1 (라인, 막대 그래프)</h3>
+        <div class="chart" id="chart_column1"></div> 
+        <h3>변경안 2 (라인, 에리어 그래프)</h3>
+        <div class="chart" id="chart_columnline1"></div> 
+        <img src = "../../img/Chart/Not1.jpg"></img><span> 라인, 라인에리어, 막대그래프 혼용 불가 ( 차량번호 인식 유무에 따라 그래프 안쓰일 수 있음 )</span><br>
+        <img src = "../../img/Chart/Not2.jpg"></img><br>
+        <div class="chart" id="chart_column2"></div> 
+        <div class="chart" id="chart_columnline2"></div>         
+        <!-- 히트맵 -->
+        <h1>Heatmap Chart</h1>
+        <h3>( Spectrum Legend 를 이용한다고 Document에 있으나 사용방법이 없어 레전드 글자색상이 못바꿈. 레전드 없는 스펙트럼 그래프 가능)</h3>
+        <div class="chart" id="chart_heatmap"></div>         
+        <!-- 레이더 -->
+        <h1>Rader Chart</h1>
+        <h3>( 기존 XAxis/YAxis와 다른 circularAxis를 쓰는데 색상 변경이 안됨. 예제도 모두 흰색 바탕이라 참고 불가)</h3>
+        <div class="chart" id="chart_rader"></div>  
+        <div class="chart" id="chart_rader_black"></div>  
+        <h3>변경안 1 (라디얼 바 차트)</h3>
+        <div class="chart" id="chart_radial_bar1"></div>  
+        <h3>변경안 2 (라디얼 바 차트 : 데이터 라벨 추가/ 주변 라벨 제거)</h3>
+        <div class="chart" id="chart_radial_bar2"></div>          
+    </body>
+</html>

@@ -1,0 +1,50 @@
+							<table class="followLPR">
+							    <colgroup>
+								   <col width="15%">
+								   <col width="15%">
+								   <col width="10%">
+						           <col width="30%">
+								   <col width="*">
+							    </colgroup>
+								<tr>
+									<th colspan="2">종류</th>
+									<th>색상</th>
+									<th>번호</th>
+									<th>구분</th>
+								</tr>
+								<tr>
+									<td><img src="img/icon_car.png"></td>
+									<td>자동차</td>
+									<td>■</td>
+									<td>123 가 1234</td>
+									<td>추적차량</td>
+								</tr>
+								<tr>
+									<td><img src="img/icon_car.png"></td>
+									<td>자동차</td>
+									<td>■</td>
+									<td>123 가 1234</td>
+									<td>추적차량</td>
+								</tr>
+								<tr>
+									<td><img src="img/icon_bus.png"></td>
+									<td>버스</td>
+									<td>■</td>
+									<td>123 가 1234</td>
+									<td>추적차량</td>
+								</tr>
+								<tr>
+									<td><img src="img/icon_bicycle.png"></td>
+									<td>오토바이</td>
+									<td>■</td>
+									<td>123 가 1234</td>
+									<td>추적차량</td>
+								</tr>
+								<tr>
+									<td><img src="img/icon_car.png"></td>
+									<td>자동차</td>
+									<td>■</td>
+									<td>123 가 1234</td>
+									<td>추적차량</td>
+								</tr>
+							</table>

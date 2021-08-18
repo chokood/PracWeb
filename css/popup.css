@@ -1,0 +1,81 @@
+@charset "utf-8";
+@import url('reset.css');
+@import url('style.css');
+@import url('../font/nanumsquare.css');
+
+
+
+#divpop {width:1000px; height:600px; color:#ffffff; background-color:#1a1a1a; }
+/*
+#divpop {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+} 
+*/
+
+.divpop-content {
+    width:1000px; height:600px; color:#ffffff; background-color:#1a1a1a;
+}
+
+.divpop-content-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.divpop-content-close:hover, .divpop-content-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* �Ǹ޴� ������ */
+.pu-tabBox {position:relative; height:65px; /*background:#1a1a1a;*/ background:#1a1a1a; }
+.pop-btnWin {position:absolute; top:5px; left:925px;  z-index:999;}
+.pu-tabTitle {position:absolute; padding:15px 0 0 10px; }
+
+ul.tabs {margin-left:70px; text-align: left; border-bottom:1px solid #333333; }
+ul.tabs li {display:inline-block;  height:50px; margin-top:15px; margin-right:2px; margin-bottom:-1px; background-color:#282828;  }
+ul.tabs li a {position: relative; display: inline-block; height:50px; padding:15px 60px;  font-size: 15px; font-weight:400; color:#282828; border:1px solid #000; border-bottom-color:#333333; }
+
+ul.tabs li a:visited {color: #828282; background:#333333; border-bottom-color:#1a1a1a; }
+ul.tabs li a:hover {background:#282828; color:#ffa800;}
+ul.tabs li.selected a, ul.tabs li.selected a:hover {position:relative; color:#ffffff; font-weight:500; background:#333333; border:1px solid #000; border-bottom-color:#333333; }
+ul.tabs li.selected a:hover {text-decoration: none;}
+
+.settingBox {width:100%; height:535px;  padding-top:70px; background-color:#333333; border-top:#333333; border-left:5px solid #1a1a1a;border-right:5px solid #1a1a1a; border-bottom:5px solid #1a1a1a; z-index:99;}
+
+/* tab1 ����� ������ȸ */
+.userList {width:800px; margin:0 auto; text-align:center;}
+.userList tr {background-color:#333333;}
+.userList .adminLine {background-color:#282828;}
+
+.userList th {height:48px; padding-top:12px; background-color:#1a1a1a; border-bottom:solid 1px #333333; }
+.userList td {height:48px; padding-top:12px; border-bottom:solid 1px #404040; border-left:solid 0px #404040;}
+
+.notUsed {color:#7d7d7d;}
+
+/* tab2 ����� ������� */
+.userInfo {width:600px; margin:0 auto;}
+.userInfo dl {display:block; width:100%; }
+.userInfo dt {width:180px; height:56px; display:inline-block;}
+.userInfo dd {width:400px; display:inline-block;}
+.txt-field {width:400px; height:46px; margin-bottom:20px; padding:10px; font-size:16px; color:#ffffff; background:#333333; border: 1px solid #666666;  }
+.btnRadio {margin-left:30px; margin-right:10px; }
+.btnRadio:nth-child(1) {margin-left:0; }
+
+.required  {font-size:20px; color:#f27f8c;}
+
+/* ���� �ϴ� ��ư���� */
+.pop-btnBox {margin:0 auto; margin-top:35px; text-align:center;}
+.pop-btnBox a {margin:0 10px;}
+

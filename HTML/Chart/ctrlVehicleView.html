@@ -1,0 +1,226 @@
+<!doctype html>
+<html>
+    <head>
+        <title>TOAST UI - Chart Test</title>
+        <meta charset="utf-8">        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.min.css" />
+        <script src="https://uicdn.toast.com/chart/latest/toastui-chart.min.js"></script>
+        <link rel="stylesheet" href="https://uicdn.toast.com/chart/latest/toastui-chart.css" />
+        <script src="https://uicdn.toast.com/chart/latest/toastui-chart.js"></script>        
+        <link rel="stylesheet" href="../../css/style_graph.css" />   
+        <script type="text/javascript" src="../../data/pie_data.js"></script>  
+        </head>
+    </head>
+    <script>
+        const chart = toastui.Chart;
+
+        var size = {                                      // 그래프 출력 크기를 지정
+            width: ( window.innerWidth || document.body.clientWidth ) * 1/3,
+            height: ( window.innerHeight || document.body.clientHeight ) * 1/2
+        }
+
+        window.onload = function () {
+            LoadCarDonutChart();   
+            LoadCycleDonutChart();   
+            LoadAreaLineAgeChart();            
+        }
+
+        function LoadCarDonutChart()
+        {
+        const el = document.getElementById('car_pie_chart');
+            var data = car_pie_data;
+            
+            const options = {
+            chart: { 
+                width: "100%", 
+                height: "100%", 
+                //title: {
+                //text: 'Donut',    // 출력 텍스트 & 가운데 출력
+                //offsetX: -70,
+                //offsetY: 220,     
+                //align:'center'   
+                //},  
+                animation: false
+            },        // 출력 그래프 크기
+            exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },
+            legend: {
+                align: 'bottom',          // legend 출력 위치
+            }, 
+            theme:{   
+                title: { 
+                fontFamily: 'Verdana',     // 출력 텍스트 색상, 폰트 페밀리, 크기 굵기
+                fontSize: 45,
+                fontWeight: 100,    
+                color: '#ff416d'
+                },      
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                },         
+                legend: {                   // Legend 폰트 관련          
+                label: {            
+                    fontFamily: 'vedana',
+                    fontSize: 10,            
+                    color: 'darkgray'
+                }
+                },        
+            }, 
+            series: {
+                dataLabels: {               // 데이터 출력 라벨
+                visible: true,
+                pieSeriesName: { visible: false }
+                },
+                radiusRange: {              // 도우넛 설정 INNER / OUTER
+                inner: '40%',
+                outer: '100%',
+                },
+            }    
+            };    
+            chart.pieChart({ el, data, options }); 
+        }
+
+        function LoadCycleDonutChart()
+        {
+        const el = document.getElementById('cycle_pie_chart');
+            var data = cycle_pie_data;
+            
+            const options = {
+            chart: { 
+                width: "100%", 
+                height: "100%", 
+                //title: {
+                //text: 'Donut',    // 출력 텍스트 & 가운데 출력
+                //offsetX: -70,
+                //offsetY: 220,     
+                //align:'center'   
+                //},  
+                animation: false
+            },        // 출력 그래프 크기
+            exportMenu: {
+                visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },
+            legend: {
+                align: 'bottom',          // legend 출력 위치
+            }, 
+            theme:{   
+                title: { 
+                fontFamily: 'Verdana',     // 출력 텍스트 색상, 폰트 페밀리, 크기 굵기
+                fontSize: 45,
+                fontWeight: 100,    
+                color: '#ff416d'
+                },      
+                chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+                },         
+                legend: {                   // Legend 폰트 관련          
+                label: {            
+                    fontFamily: 'vedana',
+                    fontSize: 10,            
+                    color: 'darkgray'
+                }
+                },        
+            }, 
+            series: {
+                dataLabels: {               // 데이터 출력 라벨
+                visible: true,
+                pieSeriesName: { visible: false }
+                },
+                radiusRange: {              // 도우넛 설정 INNER / OUTER
+                inner: '40%',
+                outer: '100%',
+                },
+            }    
+            };    
+            chart.pieChart({ el, data, options }); 
+        }
+
+        function LoadAreaLineAgeChart()
+        {
+        const el = document.getElementById('vehicle_line_bar_wnd');
+        var data = vehicle_line_area_data;
+
+        const options = {        
+            chart: { 
+            width: "100%",        // 출력 그래프 크기 Width
+            height: "100%",      // 출력 그래프 크기 Height
+            animation: false          // 출력시 애니매이션 효과 비활성 : 기본 
+            },               
+            exportMenu: {
+            visible: false            // 내보내기 버튼 화면에 출력하지 않는다.     
+            },                  
+            legend: {
+            align: 'bottom',          // legend 출력 위치
+            }, 
+            series: {
+            stack: true
+            },       
+            theme:{        
+            chart:{
+                fontFamily: 'vedana',     // 그래프 폰트             
+                backgroundColor:'rgba(30,30,30,1)',  // 그래프 배경색 
+            }, 
+            series:{
+                colors: ['rgba(255,106,107,1)','rgba(70,115,200,1)', 'rgba(0,255,200,1)'],       //  색상 지정 <색상을 해당 theme series>에서만 변경 가능
+            },     
+            xAxis: {                    // X 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 14,             
+                color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+            },
+            yAxis: {                     // Y 축 테마 처리 (색상,폰트,폰트두께,크기)            
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 14,
+                color: 'darkgray'
+                },
+                width: 1,
+                color: 'gray'
+            },
+            legend: {                  // Legend 폰트 관련
+                label: {
+                fontFamily: 'vedana',
+                fontSize: 14,
+                color: 'darkgray'
+                },         
+            },
+            plot: {                   // 그래프 내부 라인처리
+                vertical: {
+                lineColor: 'rgba(60, 80, 180, 0.3)',
+                lineWidth: 1,           
+                },
+                horizontal: {
+                lineColor: 'rgba(60, 80, 180, 0.3)',
+                lineWidth: 1, 
+                },        
+            }
+            },
+        };          
+        chart.columnLineChart({ el, data, options }); 
+        }
+    </script>
+
+    <body>            
+        <div style = "width:30%; height:100%; float:left; background-color:yellow;" id = "car_panal_wnd">     
+            
+        </div>
+        <div style = "width:70%; height:100%; float:left; background-color:black;" id = "chart_panal_wnd">     
+            <div style = "width:50%; height:50%; float:left;" id = "car_pie_chart">     
+                
+            </div>
+            <div  style = "width:50%; height:50%; float:left;" id = "cycle_pie_chart">     
+
+            </div>
+            <div style = "width:100%; height:50%; float:left;" id = "vehicle_line_bar_wnd">     
+
+            </div>       
+        </div>
+    </body>
+</html>
