@@ -3,8 +3,7 @@
 @import url('style.css');
 @import url('../font/nanumsquare.css');
 
-
-
+/*
 #divpop 
 {
     width:1000px; 
@@ -13,7 +12,8 @@
     background-color:#1a1a1a; 
     display: none;
 }
-/*
+*/
+
 #divpop {
     display: none;
     position: fixed;
@@ -25,7 +25,6 @@
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
 } 
-*/
 
 .divpop-content {
     width:1000px; height:600px; color:#ffffff; background-color:#1a1a1a;
