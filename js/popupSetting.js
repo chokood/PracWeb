@@ -1,4 +1,4 @@
-var modal = document.getElementById("divpop");
+var modal = document.getElementById("modal");
 //var btn = document.getElementById("btnLogin");
 //var span = document.getElementsByClassName("close")[0];
 
