@@ -41,6 +41,21 @@
           	});
       	});
 
+		var modal = document.getElementById("modal");
+
+		function openPopupSetting()
+		{
+			console.log('openSetting');
+			modal.style.display = "block";
+		}
+
+		window.onclick = function(event) 
+		{
+			if( event.target == modal ) {
+				modal.style.display = "none";
+			}
+		};
+
 	  	const chart = toastui.Chart;
 
 		function showPersonChart() {			
@@ -921,4 +936,5 @@
 	</div>
 	<!-- 전체 wrap.E -->
 </body>
+
 </html>
